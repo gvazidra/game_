@@ -103,6 +103,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        else:
+            k = pygame.key.get_pressed()
+            if k[pygame.K_ESCAPE]:
+                running = False
     all_sprites.update()
     screen.blit(background_img, (0, 0))
     all_sprites.draw(screen)

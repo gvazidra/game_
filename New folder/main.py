@@ -1,7 +1,6 @@
 import pygame
 import random
 import os 
-
 WIDTH = 500
 HEIGHT = 480
 FPS = 30
@@ -19,7 +18,7 @@ pygame.mixer.init()
 
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')
-player_img = pygame.image.load(os.path.join(img_folder, 'pig.png')).convert()
+player_img_set = [pygame.image.load(os.path.join(img_folder, f"pig_{i}.png")).convert() for i in range(1, 4)]
 background_img = pygame.image.load(os.path.join(img_folder, 'background.png')).convert()
 
 sound_floders = os.path.join(game_folder, 'sounds')
@@ -34,7 +33,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
-        self.image = player_img
+        self.image = player_img_set[1]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.center = (960, 540)
@@ -43,26 +42,31 @@ class Player(pygame.sprite.Sprite):
         self.flip = 0
         self.jumpCount = 10
         self.isJump = 10
+        self.i = 0
     
     def update(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
+            self.image = pygame.transform.flip(player_img_set[self.i], True, False)
+            self.image.set_colorkey(BLACK)
+            self.i += 1
+            if self.i == 3:
+                self.i = 0
             if not channel.get_busy():
                 channel.play(sound_pig)
-            if self.flip == 0:
-                self.flip = 1
-                self.image = pygame.transform.flip(self.image, True, False)
             self.rect.x += self.r_speed
             self.l_speed = 4
             if self.r_speed < 10:
                 self.r_speed += 1
                 
         elif keys[pygame.K_LEFT]:
+            self.image = player_img_set[self.i]
+            self.i += 1
+            if self.i == 3:
+                self.i = 0
+            self.image.set_colorkey(BLACK)
             if not channel.get_busy():
                 channel.play(sound_pig)
-            if self.flip == 1:
-                self.flip = 0
-                self.image = pygame.transform.flip(self.image, True, False)
             self.r_speed = 4
             self.rect.x -= self.l_speed
             if self.l_speed < 10:

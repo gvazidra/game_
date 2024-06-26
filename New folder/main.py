@@ -6,6 +6,7 @@ WIDTH = 500
 HEIGHT = 480
 FPS = 30
 
+pygame.init()
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -14,15 +15,25 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 screen = pygame.display.set_mode((1920, 1080))
+pygame.mixer.init()
 
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')
 player_img = pygame.image.load(os.path.join(img_folder, 'pig.png')).convert()
 background_img = pygame.image.load(os.path.join(img_folder, 'background.png')).convert()
 
+sound_floders = os.path.join(game_folder, 'sounds')
+sound_pig = pygame.mixer.Sound(sound_floders + '\\pig_sound.ogg')
+sound_pig.set_volume(1)
+channel = pygame.mixer.find_channel()
+
+channel.play(sound_pig)
+channel.set_volume(0.9)
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
+        self.key_pressed = False
         self.image = player_img
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
@@ -36,6 +47,8 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
+            if not channel.get_busy():
+                channel.play(sound_pig)
             if self.flip == 0:
                 self.flip = 1
                 self.image = pygame.transform.flip(self.image, True, False)
@@ -44,7 +57,9 @@ class Player(pygame.sprite.Sprite):
             if self.r_speed < 10:
                 self.r_speed += 1
                 
-        if keys[pygame.K_LEFT]:
+        elif keys[pygame.K_LEFT]:
+            if not channel.get_busy():
+                channel.play(sound_pig)
             if self.flip == 1:
                 self.flip = 0
                 self.image = pygame.transform.flip(self.image, True, False)
@@ -52,6 +67,9 @@ class Player(pygame.sprite.Sprite):
             self.rect.x -= self.l_speed
             if self.l_speed < 10:
                 self.l_speed += 1
+        
+        else:
+            channel.stop()
                 
         if keys[pygame.K_SPACE]:
             self.isJump = True

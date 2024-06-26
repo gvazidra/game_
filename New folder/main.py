@@ -1,9 +1,5 @@
 from platform import *
-<<<<<<< HEAD
 from Item import *
-=======
-from pig import *
->>>>>>> 9a4f26cf2bed0a5c072bb54e00b034a542488c61
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()

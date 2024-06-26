@@ -1,4 +1,6 @@
 from connectionAssets import *
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -12,10 +14,10 @@ class Player(pygame.sprite.Sprite):
         self.isJump = 10
         self.i = 0
         self.jumpSound = 0
-    
+
     def move(self, k):
-        print((k+1) // 2)
-        self.image = pygame.transform.flip(player_img_set[self.i], (k+1) // 2, False)
+        print((k + 1) // 2)
+        self.image = pygame.transform.flip(player_img_set[self.i], (k + 1) // 2, False)
         self.image.set_colorkey(BLACK)
         self.i += 1
         if self.i == 3:
@@ -25,30 +27,26 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speed * k
         if self.speed < 15:
             self.speed += 1
-    
-    def jump(self):
-        if self.jumpSound == 0:
-                channel0.stop()
-                channel1.play(sound_pig[random.randint(0, 2)])
-                self.jumpSound = 1
-        self.isJump = True
-    
+
     def update(self):
         keys = pygame.key.get_pressed()
-        
-        if keys[pygame.K_LEFT]:
-            self.move(-1)
-        elif keys[pygame.K_RIGHT]:
+        if keys[pygame.K_RIGHT]:
             self.move(1)
+
+        elif keys[pygame.K_LEFT]:
+            self.move(-1)
+
         else:
-            if not self.isJump == True:
-                channel0.stop()
-                
+            self.speed = 4
+            channel0.stop()
+
         if keys[pygame.K_SPACE]:
-            self.jump()
-            
-            
-        if self.isJump == True:
+            if self.jumpSound == 0:
+                channel1.play(sound_pig[random.randint(0, 2)])
+            self.jumpSound = 1
+            self.isJump = True
+        if self.isJump is True:
+
             if self.jumpCount >= -10:
 
                 if self.jumpCount < 0:
@@ -59,22 +57,6 @@ class Player(pygame.sprite.Sprite):
                 self.jumpCount -= 1
 
             else:
-                channel1.stop()
                 self.jumpSound = 0
                 self.isJump = False
                 self.jumpCount = 10
-        '''keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT]:
-            self.move(1)
-                
-        elif keys[pygame.K_LEFT]:
-            self.move(-1)
-            
-        if keys[pygame.K_SPACE]:
-            if self.jumpSound == 0:
-                channel0.stop()
-                channel1.play(sound_pig[random.randint(0, 2)])
-                self.jumpSound = 1
-            self.isJump = True
-        
-        self.jump()'''

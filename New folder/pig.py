@@ -38,7 +38,8 @@ class Player(pygame.sprite.Sprite):
 
         else:
             self.speed = 4
-            channel0.stop()
+            if not self.isJump is True:
+                channel0.stop()
 
         if keys[pygame.K_SPACE]:
             if self.jumpSound == 0:

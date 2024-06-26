@@ -1,11 +1,11 @@
-from pig import *
-            
+from platform import *
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
 player = Player()
+for i in range(9):
+    all_sprites.add(list_platform_level1[i])
 all_sprites.add(player)
-
 def main():
     running = True
     while running:

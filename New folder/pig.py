@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
         self.image = player_img_set[1]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.center = (960, 540)
+        self.rect.center = (start_x, start_y)
         self.speed = 4
         self.jumpCount = 10
         self.isJump = 10

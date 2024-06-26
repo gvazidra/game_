@@ -1,4 +1,5 @@
 from platform import *
+from pig import *
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
@@ -14,9 +15,9 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             else:
-                k = pygame.key.get_pressed()
-                if k[pygame.K_ESCAPE]:
-                    running = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
         all_sprites.update()
         screen.blit(background_img, (0, 0))
         all_sprites.draw(screen)

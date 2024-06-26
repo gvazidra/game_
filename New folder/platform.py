@@ -1,4 +1,4 @@
-from pig import *
+from connectionAssets import *
 import pygame
 class Platform(pygame.sprite.Sprite):
 	def __init__(self, X, Y):

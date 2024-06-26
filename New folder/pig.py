@@ -26,25 +26,29 @@ class Player(pygame.sprite.Sprite):
         if self.speed < 15:
             self.speed += 1
     
+    def jump(self):
+        if self.jumpSound == 0:
+                channel0.stop()
+                channel1.play(sound_pig[random.randint(0, 2)])
+                self.jumpSound = 1
+        self.isJump = True
+    
     def update(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT]:
-            self.move(1)
-                
-        elif keys[pygame.K_LEFT]:
-            self.move(-1)
         
+        if keys[pygame.K_LEFT]:
+            self.move(-1)
+        elif keys[pygame.K_RIGHT]:
+            self.move(1)
         else:
-            self.speed = 4
-            channel0.stop()
+            if not self.isJump == True:
+                channel0.stop()
                 
         if keys[pygame.K_SPACE]:
-            if self.jumpSound == 0:
-                channel1.play(sound_pig[random.randint(0, 2)])
-            self.jumpSound = 1
-            self.isJump = True
-        if self.isJump is True:
-
+            self.jump()
+            
+            
+        if self.isJump == True:
             if self.jumpCount >= -10:
 
                 if self.jumpCount < 0:
@@ -55,6 +59,22 @@ class Player(pygame.sprite.Sprite):
                 self.jumpCount -= 1
 
             else:
+                channel1.stop()
                 self.jumpSound = 0
                 self.isJump = False
                 self.jumpCount = 10
+        '''keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            self.move(1)
+                
+        elif keys[pygame.K_LEFT]:
+            self.move(-1)
+            
+        if keys[pygame.K_SPACE]:
+            if self.jumpSound == 0:
+                channel0.stop()
+                channel1.play(sound_pig[random.randint(0, 2)])
+                self.jumpSound = 1
+            self.isJump = True
+        
+        self.jump()'''

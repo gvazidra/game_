@@ -1,4 +1,7 @@
 from connectionAssets import *
+from carrot import Carrot
+from Enemy import Han
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -12,6 +15,8 @@ class Player(pygame.sprite.Sprite):
         self.isJump = 10
         self.i = 0
         self.jumpSound = 0
+
+
     
     def move(self, k):
         print((k+1) // 2)
@@ -32,7 +37,20 @@ class Player(pygame.sprite.Sprite):
                 channel1.play(sound_pig[random.randint(0, 2)])
                 self.jumpSound = 1
         self.isJump = True
-    
+
+    # def shoot_carrot(self):
+    #     if self.rect.left > 0 and self.rect.right < 1920:
+    #         if self.rect.left > 0:
+    #             carrot = Carrot(self.rect.left, self.rect.centery, False)
+    #         else:
+    #             carrot = Carrot(self.rect.right, self.rect.centery, True)
+    #         self.carrots.add(carrot)
+    #         self.all_sprites.add(carrot)
+
+    # def remove_carrot(self, carrot):
+    #     self.carrots.remove(carrot)
+    #     self.all_sprites.remove(carrot)
+
     def update(self):
         keys = pygame.key.get_pressed()
         
@@ -46,6 +64,16 @@ class Player(pygame.sprite.Sprite):
                 
         if keys[pygame.K_SPACE]:
             self.jump()
+
+        # if keys[pygame.K_r]:
+        #     self.shoot_carrot()
+
+        # for carrot in self.carrots:
+        #     collision_detected = pygame.sprite.spritecollide(carrot, self.chickens, True)
+        #     if collision_detected:
+        #         self.carrots.remove(carrot)
+        #         self.all_sprites.remove(carrot)
+
             
             
         if self.isJump == True:

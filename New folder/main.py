@@ -1,5 +1,6 @@
 from platform import *
 from pig import *
+from Enemy import Han
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
@@ -7,6 +8,12 @@ player = Player()
 for i in range(9):
     all_sprites.add(list_platform_level1[i])
 all_sprites.add(player)
+han1 = Han((800, 530), True, 600, 900)
+han2 = Han((1300, 530), False, 1200, 1400)
+all_sprites.add(han1)
+all_sprites.add(han2)
+
+
 def main():
     running = True
     while running:

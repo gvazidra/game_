@@ -2,6 +2,9 @@ import pygame
 import os 
 import random
 
+SPEED_HAN = 2
+SPEED_CARROT = 10
+
 WIDTH = 500
 HEIGHT = 480
 FPS = 25

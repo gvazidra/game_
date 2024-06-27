@@ -3,6 +3,8 @@ from connectionAssets import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
+        self.Life_amount = 3
+        self.Water_ability = 1
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
         self.image = player_img_set[1]
@@ -22,7 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.i += 1
         if self.i == 3:
             self.i = 0
-        if not channel0.get_busy():
+        if not channel0.get_busy() and channel0.get_sound() != sound_button:
             channel0.play(sound_walk_pig)
         self.rect.x += self.speed * k
         if self.speed < 15:
@@ -38,11 +40,11 @@ class Player(pygame.sprite.Sprite):
 
         else:
             self.speed = 4
-            if not self.isJump is True:
+            if not self.isJump is True and channel0.get_sound() != sound_button:
                 channel0.stop()
 
         if keys[pygame.K_SPACE]:
-            if self.jumpSound == 0:
+            if self.jumpSound == 0 and channel0.get_sound() != sound_button:
                 channel1.play(sound_pig[random.randint(0, 2)])
             self.jumpSound = 1
             self.isJump = True

@@ -49,14 +49,14 @@ channel1.set_volume(0.3)
 pygame.mixer.init()
 
 #image of button
-button_image = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 3.png")
-button_hover_image = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 4.png")
+button_image = pygame.image.load(os.path.join(img_folder, 'play_button.png')).convert()
+button_hover_image = pygame.image.load(os.path.join(img_folder, 'play_button_triggered.png')).convert()
 
-quit_button_img = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 2.png")
-quit_hover_button_img = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 5.png")
+quit_button_img = pygame.image.load(os.path.join(img_folder, 'quit_button.png')).convert()
+quit_hover_button_img = pygame.image.load(os.path.join(img_folder, 'quit_button_triggered.png')).convert()
 
-op_button_img = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 1.png")
-op_hover_button_img = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 7.png")
+op_button_img = pygame.image.load(os.path.join(img_folder, 'setting_button.png')).convert()
+op_hover_button_img = pygame.image.load(os.path.join(img_folder, 'setting_button_triggered.png')).convert()
 
-new_button_img = pygame.image.load(r"C:\Users\dzhar\Downloads\volume.png")
-new_hover_button_img = pygame.image.load(r"C:\Users\dzhar\Downloads\Frame 8.png")
+volume_button_img = pygame.image.load(os.path.join(img_folder, 'volume_button.png')).convert()
+volume_hover_button_img = pygame.image.load(os.path.join(img_folder, 'volume_button_triggered.png')).convert()

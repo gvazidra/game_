@@ -78,7 +78,7 @@ def main():
                     if quit_button.is_clicked(mouse_pos):
                         is_menu = 'Main_menu'
                         channel0.play(sound_button)
-                    elif new_button1.is_clicked(mouse_pos):
+                    elif volume_button1.is_clicked(mouse_pos):
                         pass
                 elif is_menu == 'Pause_2':
                     if quit_pause_button.is_clicked(mouse_pos):

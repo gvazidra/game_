@@ -1,4 +1,7 @@
 from platform import *
+from Enemy import Han
+from pig import *
+from carrot import Carrot
 from Item import *
 from button import *
 pygame.display.set_caption("My Game")
@@ -7,6 +10,8 @@ all_sprites = pygame.sprite.Group()
 ships_group = pygame.sprite.Group()
 water_group = pygame.sprite.Group()
 blue_carrot = pygame.sprite.Group()
+carrots = pygame.sprite.Group()
+#chickens = pygame.sprite.Group()
 blue_carrot.add(Blue_carrot(start_x - 200, start_y + 40))
 player = Player()
 
@@ -17,9 +22,19 @@ for i in range(2):
 water_group.add(list_water_level1[0])
 all_sprites.add(blue_carrot)
 all_sprites.add(player)
+
+han1 = Han((800, 530), True, 600, 900)
+han2 = Han((1300, 530), False, 1200, 1400)
+#chickens.add(han1)
+#chickens.add(han2)
+all_sprites.add(han1)
+all_sprites.add(han2)
+
 font = pygame.font.Font(None, 36)
 
 def main():
+    global last_shot_time
+    last_shot_time = pygame.time.get_ticks()
     is_menu = 'Main_menu'
     running = True
     while running:
@@ -27,16 +42,27 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                channel0.stop()
-                if is_menu == 'Main_menu':
-                    running = False
-                if is_menu == 'Option_menu':
-                    is_menu = 'Main_menu'
-                if is_menu == 'Game':
-                    is_menu = 'Pause'
-                if is_menu == 'Pause_2':
-                    is_menu = 'Game'
+            elif event.type == pygame.KEYDOWN:
+                current_time = pygame.time.get_ticks()
+                if current_time - last_shot_time > 500:
+                    if event.key == pygame.K_r:
+                        carrot = player.shoot_carrot()
+                        if carrot:
+                            carrots.add(carrot)
+                            all_sprites.add(carrot)
+                            last_shot_time = current_time
+                if event.key == pygame.K_ESCAPE:
+                #channel0.stop()
+                    if is_menu == 'Main_menu':
+                        running = False
+                    if is_menu == 'Option_menu':
+                        is_menu = 'Main_menu'
+                    if is_menu == 'Game':
+                        is_menu = 'Pause'
+                    if is_menu == 'Pause_2':
+                        is_menu = 'Game'
+                    
+                
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if is_menu == 'Main_menu':

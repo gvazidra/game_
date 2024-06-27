@@ -1,6 +1,5 @@
 from connectionAssets import *
-
-
+from carrot import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         self.Life_amount = 3
@@ -10,16 +9,16 @@ class Player(pygame.sprite.Sprite):
         self.image = player_img_set[1]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.center = (start_x, start_y)
+        self.rect.center = (960, 540)
         self.speed = 4
         self.jumpCount = 10
         self.isJump = 10
         self.i = 0
         self.jumpSound = 0
-
+    
     def move(self, k):
-        print((k + 1) // 2)
-        self.image = pygame.transform.flip(player_img_set[self.i], (k + 1) // 2, False)
+        print((k+1) // 2)
+        self.image = pygame.transform.flip(player_img_set[self.i], (k+1) // 2, False)
         self.image.set_colorkey(BLACK)
         self.i += 1
         if self.i == 3:
@@ -29,20 +28,28 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += self.speed * k
         if self.speed < 15:
             self.speed += 1
-
+    
+    def jump(self):
+        if self.jumpSound == 0:
+                channel0.stop()
+                channel1.play(sound_pig[random.randint(0, 2)])
+                self.jumpSound = 1
+        self.isJump = True
+    
     def update(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT]:
-            self.move(1)
-
-        elif keys[pygame.K_LEFT]:
+        
+        if keys[pygame.K_LEFT]:
             self.move(-1)
-
+            self.dir = -1
+        elif keys[pygame.K_RIGHT]:
+            self.move(1)
+            self.dir = 1
         else:
             self.speed = 4
             if not self.isJump is True and channel0.get_sound() != sound_button:
                 channel0.stop()
-
+                
         if keys[pygame.K_SPACE]:
             if self.jumpSound == 0 and channel0.get_sound() != sound_button:
                 channel1.play(sound_pig[random.randint(0, 2)])
@@ -60,6 +67,27 @@ class Player(pygame.sprite.Sprite):
                 self.jumpCount -= 1
 
             else:
+                channel1.stop()
                 self.jumpSound = 0
                 self.isJump = False
                 self.jumpCount = 10
+
+    def shoot_carrot(self):
+        carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
+        return carrot
+
+        '''keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            self.move(1)
+                
+        elif keys[pygame.K_LEFT]:
+            self.move(-1)
+            
+        if keys[pygame.K_SPACE]:
+            if self.jumpSound == 0:
+                channel0.stop()
+                channel1.play(sound_pig[random.randint(0, 2)])
+                self.jumpSound = 1
+            self.isJump = True
+        
+        self.jump()'''

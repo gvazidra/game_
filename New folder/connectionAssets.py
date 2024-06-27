@@ -4,6 +4,9 @@ import random
 
 WIDTH = 1920
 HEIGHT = 1080
+SPEED_HAN = 2
+SPEED_CARROT = 10
+
 FPS = 25
 start_x = 960
 start_y = 540

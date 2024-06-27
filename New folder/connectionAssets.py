@@ -8,7 +8,8 @@ SPEED_CARROT = 10
 WIDTH = 500
 HEIGHT = 480
 FPS = 25
-
+start_x = 960
+start_y = 540
 pygame.init()
 
 WHITE = (255, 255, 255)
@@ -27,7 +28,12 @@ img_folder = os.path.join(game_folder, 'img')
 player_img_set = [pygame.image.load(os.path.join(img_folder, f"pig_{i}.png")).convert() for i in range(1, 5)]
 background_img = pygame.image.load(os.path.join(img_folder, 'background.png')).convert()
 platform_img = pygame.image.load(os.path.join(img_folder, 'platform1.png')).convert()
-#sound of walk
+
+ships_img = pygame.image.load(os.path.join(img_folder, 'ships.png')).convert()
+blue_carrot_img = pygame.image.load(os.path.join(img_folder, 'blue_carrot.png')).convert()
+water_img  = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
+#���� ��������
+
 sound_floders = os.path.join(game_folder, 'sounds')
 sound_walk_pig = pygame.mixer.Sound(sound_floders + '\\pig_walk_sound.ogg')
 sound_walk_pig.set_volume(1)

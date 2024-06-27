@@ -1,10 +1,5 @@
-import pygame
-
-from carrot import Carrot
 from connectionAssets import *
-import random
-#from Enemy import Han
-
+from carrot import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -15,14 +10,12 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (960, 540)
         self.speed = 4
         self.jumpCount = 10
-        self.isJump = False
+        self.isJump = 10
         self.i = 0
         self.jumpSound = 0
-        self.runningRight = 0
-
     
     def move(self, k):
-        #print((k+1) // 2)
+        print((k+1) // 2)
         self.image = pygame.transform.flip(player_img_set[self.i], (k+1) // 2, False)
         self.image.set_colorkey(BLACK)
         self.i += 1
@@ -40,23 +33,25 @@ class Player(pygame.sprite.Sprite):
                 channel1.play(sound_pig[random.randint(0, 2)])
                 self.jumpSound = 1
         self.isJump = True
-
+    
     def update(self):
         keys = pygame.key.get_pressed()
+        
         if keys[pygame.K_LEFT]:
             self.move(-1)
-            self.runningRight = 0
+            self.dir = -1
         elif keys[pygame.K_RIGHT]:
             self.move(1)
-            self.runningRight = 1
+            self.dir = 1
         else:
-            if not self.isJump:
+            if not self.isJump == True:
                 channel0.stop()
                 
         if keys[pygame.K_SPACE]:
             self.jump()
-
-        if self.isJump:
+            
+            
+        if self.isJump == True:
             if self.jumpCount >= -10:
 
                 if self.jumpCount < 0:
@@ -73,7 +68,21 @@ class Player(pygame.sprite.Sprite):
                 self.jumpCount = 10
 
     def shoot_carrot(self):
-
-        direction = 1 if self.runningRight else -1
-        carrot = Carrot(self.rect.centerx, self.rect.top + 50, direction)
+        carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
         return carrot
+
+        '''keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            self.move(1)
+                
+        elif keys[pygame.K_LEFT]:
+            self.move(-1)
+            
+        if keys[pygame.K_SPACE]:
+            if self.jumpSound == 0:
+                channel0.stop()
+                channel1.play(sound_pig[random.randint(0, 2)])
+                self.jumpSound = 1
+            self.isJump = True
+        
+        self.jump()'''

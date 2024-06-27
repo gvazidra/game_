@@ -3,7 +3,6 @@ from connectionAssets import *
 import os
 class Carrot(pygame.sprite.Sprite):
     def __init__(self, x, y,  direction):
-        #pygame.sprite.Sprite.__init__(self)
         super().__init__()
         self.defaultImage = pygame.image.load(os.path.join(img_folder, 'flying_carrot.png')).convert()
 
@@ -18,18 +17,6 @@ class Carrot(pygame.sprite.Sprite):
         self.speed = SPEED_CARROT
         self.direction = direction
         self.distance = 0
-
-
-
-        #super(Carrot, self).__init__()
-        # self.screen = screen
-        # self.rect = self.image.get_rect()
-        # self.rect.x = x
-        # self.rect.y = y
-        # self.x = float(self.rect.x)
-        # self.speed = SPEED_CARROT
-        # self.movingRight = direction
-        # self.distance = 0
 
     def update(self):
         if self.direction == 1:

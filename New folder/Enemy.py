@@ -26,19 +26,12 @@ class Han(pygame.sprite.Sprite):
 
         if self.rect.left < self.borderL:
             self.movingRight = True
-            #self.image = pygame.transform.flip(self.enemyImage, True, False)
             self.enemyImage = pygame.transform.flip(self.enemyImage, True, False)
             self.image = self.enemyImage
-            #self.rect.left = self.borderL
-            #self.rect.right = self.borderR
         elif self.rect.right > self.borderR:
             self.movingRight = False
-            #self.image = pygame.transform.flip(self.enemyImage, True, False)
             self.enemyImage = pygame.transform.flip(self.enemyImage, True, False)
             self.image = self.enemyImage
-            #self.rect.right = self.borderR
-            #self.rect.left = self.borderL
-
 
     def draw(self, displaySurface):
         displaySurface.blit(self.image, self.rect)

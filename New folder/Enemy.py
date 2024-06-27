@@ -1,8 +1,8 @@
 import pygame
+import os
 from connectionAssets import *
 
 class Han(pygame.sprite.Sprite):
-
     def __init__(self, position, moveRight, borderL, borderR):
         pygame.sprite.Sprite.__init__(self)
         self.movingRight = moveRight
@@ -19,31 +19,33 @@ class Han(pygame.sprite.Sprite):
 
 
     def update(self):
-        if self.movingRight == False:
-            self.rect.x -= SPEED_HAN
-        else:
+        if self.movingRight:
             self.rect.x += SPEED_HAN
+        else:
+            self.rect.x -= SPEED_HAN
 
-        if self.rect.right < self.borderL:
+        if self.rect.left < self.borderL:
             self.movingRight = True
             #self.image = pygame.transform.flip(self.enemyImage, True, False)
             self.enemyImage = pygame.transform.flip(self.enemyImage, True, False)
             self.image = self.enemyImage
-            self.rect.left = self.borderL
-        if self.rect.right > self.borderR:
+            #self.rect.left = self.borderL
+            #self.rect.right = self.borderR
+        elif self.rect.right > self.borderR:
             self.movingRight = False
             #self.image = pygame.transform.flip(self.enemyImage, True, False)
             self.enemyImage = pygame.transform.flip(self.enemyImage, True, False)
             self.image = self.enemyImage
-            self.rect.right = self.borderR
+            #self.rect.right = self.borderR
+            #self.rect.left = self.borderL
 
 
     def draw(self, displaySurface):
         displaySurface.blit(self.image, self.rect)
 
-    # def kill(self):
-    #     self.all_sprites.remove(self)
-    #     self.chickens.remove(self)
+    def kill(self):
+        self.all_sprites.remove(self)
+        self.chickens.remove(self)
 
 
 

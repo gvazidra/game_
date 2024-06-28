@@ -1,4 +1,3 @@
-from carrot import *
 from platform import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -15,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.isJump = 0
         self.i = 0
         self.jumpSound = 0
+        self.dir = -1
     
     def move(self, k):
         print((k+1) // 2)
@@ -98,23 +98,7 @@ class Player(pygame.sprite.Sprite):
             channel1.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
-def shoot_carrot(self):
+    def shoot_carrot(self):
         carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
         return carrot
-
-        '''keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT]:
-            self.move(1)
-                
-        elif keys[pygame.K_LEFT]:
-            self.move(-1)
-            
-        if keys[pygame.K_SPACE]:
-            if self.jumpSound == 0:
-                channel0.stop()
-                channel1.play(sound_pig[random.randint(0, 2)])
-                self.jumpSound = 1
-            self.isJump = True
-        
-        self.jump()'''
 

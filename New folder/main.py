@@ -1,12 +1,11 @@
 from pig import *
 from platform import *
-from carrot import Carrot
-from Item import *
 from button import *
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
 player = Player()
+carrots = pygame.sprite.Group()
 for i in range(list_platform_level[number_of_level].__len__()):
     all_sprites.add(list_platform_level[number_of_level][i])
 for i in range(list_chicken_level[number_of_level].__len__()):

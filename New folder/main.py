@@ -103,7 +103,7 @@ def game():
     all_sprites.draw(screen)
     life_text = font.render(f"Lives: {player.life_amount}", True, (0, 0, 0))
     life_rect = life_text.get_rect()
-    life_rect.midtop = (start_x - 700, start_y - 410)
+    life_rect.midtop = (260, 130)
     screen.blit(life_text, life_rect)
     if player.life_amount <= 0:
         pygame.quit()

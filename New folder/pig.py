@@ -2,7 +2,7 @@ from carrot import *
 from platform import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
-        self.life_amount = 3
+        self.life_amount = 4
         self.water_ability = 1
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
@@ -91,7 +91,12 @@ class Player(pygame.sprite.Sprite):
             self.rect.center = (start_x, start_y)
             channel1.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
-
+        collisions_chicken = pygame.sprite.spritecollide(self, list_chicken_level[number_of_level], False)
+        if collisions_chicken:
+            pygame.time.delay(250)
+            self.rect.center = (start_x, start_y)
+            channel1.play(sound_pig[random.randint(0, 2)])
+            self.life_amount -= 1
 
 def shoot_carrot(self):
         carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)

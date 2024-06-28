@@ -1,4 +1,5 @@
 from platform import *
+from carrot import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         self.life_amount = 4

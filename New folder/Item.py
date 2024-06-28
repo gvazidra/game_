@@ -1,5 +1,4 @@
-from pig import *
-import pygame
+from connectionAssets import *
 class Blue_carrot(pygame.sprite.Sprite):
 	def __init__(self, X, Y):
 		super().__init__()

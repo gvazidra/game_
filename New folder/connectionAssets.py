@@ -1,15 +1,14 @@
 import pygame
 import os 
 import random
-
 WIDTH = 1920
 HEIGHT = 1080
 SPEED_HAN = 2
 SPEED_CARROT = 10
-
+number_of_level = 0
 FPS = 25
-start_x = 960
-start_y = 540
+start_x = 400
+start_y = 300
 pygame.init()
 
 WHITE = (255, 255, 255)

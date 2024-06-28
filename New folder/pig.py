@@ -1,9 +1,9 @@
-from connectionAssets import *
 from carrot import *
+from platform import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
-        self.Life_amount = 3
-        self.Water_ability = 1
+        self.life_amount = 3
+        self.water_ability = 1
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
         self.image = player_img_set[1]
@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = (960, 540)
         self.speed = 4
         self.jumpCount = 10
-        self.isJump = 10
+        self.isJump = 0
         self.i = 0
         self.jumpSound = 0
     
@@ -72,7 +72,28 @@ class Player(pygame.sprite.Sprite):
                 self.isJump = False
                 self.jumpCount = 10
 
-    def shoot_carrot(self):
+        collisions_falls = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        if (not collisions_falls) and self.isJump == 0:
+            self.rect.y += 12
+        collisions_carrot = pygame.sprite.spritecollide(self, blue_carrot_level, False)
+        if collisions_carrot:
+            self.water_ability = 0
+            blue_carrot_level[number_of_level].image.set_alpha(0)
+        collisions_water = pygame.sprite.spritecollide(self, list_water_level[number_of_level], False)
+        if collisions_water and self.water_ability:
+            pygame.time.delay(300)
+            self.rect.center = (start_x, start_y)
+            channel1.play(sound_pig[random.randint(0, 2)])
+            self.life_amount -= 1
+        collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[number_of_level], False)
+        if collisions_ships:
+            pygame.time.delay(250)
+            self.rect.center = (start_x, start_y)
+            channel1.play(sound_pig[random.randint(0, 2)])
+            self.life_amount -= 1
+
+
+def shoot_carrot(self):
         carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
         return carrot
 
@@ -91,3 +112,4 @@ class Player(pygame.sprite.Sprite):
             self.isJump = True
         
         self.jump()'''
+

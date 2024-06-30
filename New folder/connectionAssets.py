@@ -1,9 +1,11 @@
 import pygame
-import os 
+import os
+pygame.init()
 import random
 WIDTH = 1920
 HEIGHT = 1080
 SPEED_HAN = 2
+PLAYER_SPEED = 4
 SPEED_CARROT = 20
 number_of_level = 0
 FPS = 25

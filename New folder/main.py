@@ -1,6 +1,9 @@
 from pig import *
 from platform import *
 from button import *
+from carrot import *
+
+
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
@@ -8,6 +11,10 @@ player = Player()
 carrots = pygame.sprite.Group()
 for i in range(list_platform_level[number_of_level].__len__()):
     all_sprites.add(list_platform_level[number_of_level][i])
+for i in range(list_water_level[number_of_level].__len__()):
+    all_sprites.add(list_water_level[number_of_level][i])
+for i in range(list_ships_level[number_of_level].__len__()):
+    all_sprites.add(list_ships_level[number_of_level][i])
 for i in range(list_chicken_level[number_of_level].__len__()):
     all_sprites.add(list_chicken_level[number_of_level][i])
 all_sprites.add(blue_carrot_level[number_of_level])
@@ -19,11 +26,17 @@ all_sprites.add(player)
 font = pygame.font.Font(None, 36)
 
 def main():
+    pygame.FULLSCREEN
     global last_shot_time
     last_shot_time = pygame.time.get_ticks()
     is_menu = 'Main_menu'
     running = True
+    water_used = False
     while running:
+        if not player.water_ability and not water_used:
+            for j in range (list_water_level[number_of_level].__len__()):
+                list_platform_level[number_of_level].append(list_water_level[number_of_level][j])
+            water_used = True
         clock.tick(FPS)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

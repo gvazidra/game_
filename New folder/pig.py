@@ -2,14 +2,14 @@ from platform import *
 from carrot import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
-        self.life_amount = 4
+        self.life_amount = 3
         self.water_ability = 1
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
         self.image = player_img_set[1]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.rect.center = (960, 540)
+        self.rect.center = (start_x, start_y)
         self.speed = 4
         self.jumpCount = 10
         self.isJump = 0
@@ -100,7 +100,7 @@ class Player(pygame.sprite.Sprite):
 
         collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[number_of_level], False)
         if collisions_ships:
-            pygame.time.delay(250)
+            pygame.time.delay(300)
             self.rect.center = (start_x, start_y)
             channel1.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1

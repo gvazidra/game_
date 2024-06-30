@@ -12,9 +12,9 @@ class Button:
         self.x = center_x - self.width // 2
         self.y = center_y - self.height // 2
 
-    def draw(self, screen):
+    def draw(self, virtual_surface):
         current_image = self.hover_image if self.is_hovered else self.image
-        screen.blit(current_image, (self.x, self.y))
+        virtual_surface.blit(current_image, (self.x, self.y))
 
     def is_clicked(self, mouse_pos):
         button_rect = self.image.get_rect(center=(self.center_x, self.center_y))
@@ -22,7 +22,7 @@ class Button:
 
     def handle_hover(self, mouse_pos):
         self.is_hovered = self.is_clicked(mouse_pos)
-        
+
 quit_button = Button(WIDTH // 2, HEIGHT // 2 + 100, quit_button_img, quit_hover_button_img)
 quit_pause_button = Button(WIDTH // 2, HEIGHT // 2, quit_button_img, quit_hover_button_img)
 play_button = Button(WIDTH // 2, HEIGHT // 2 - 100, button_image, button_hover_image)

@@ -1,17 +1,21 @@
-import pygame
+from pygame import *
 import os
+import pygame
 pygame.init()
 import random
-WIDTH = 1920
-HEIGHT = 1080
+
+info = display.Info()
+WIDTH = info.current_w
+HEIGHT = info.current_h
 SPEED_HAN = 2
 PLAYER_SPEED = 4
 SPEED_CARROT = 20
 number_of_level = 0
 FPS = 25
-start_x = 400
-start_y = 300
-pygame.init()
+start_x = 440
+start_y = HEIGHT - 95
+
+
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -21,8 +25,18 @@ BLUE = (0, 0, 255)
 
 pygame.mixer.init()
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-screen.fill((40, 40, 150))
+screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+
+#прорисовка окна
+virtual_surface = Surface((WIDTH, HEIGHT))
+
+FULL_SCREEN_SIZE = (info.current_w, info.current_h)
+CURRENT_SIZE = screen.get_size()
+is_fullscreen = False
+last_size = CURRENT_SIZE
+#
+
+virtual_surface.fill((40, 40, 150))
 #file upload
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')

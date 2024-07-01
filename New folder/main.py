@@ -31,7 +31,7 @@ def main():
     Game_active = True
     Is_choose = False
 
-    while running:
+    while running: 
         if not player.water_ability and not water_used:
             for j in range (list_water_level[number_of_level].__len__()):
                 list_platform_level[number_of_level].append(list_water_level[number_of_level][j])

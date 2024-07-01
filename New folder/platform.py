@@ -1,6 +1,5 @@
 from Item import *
 from Enemy import Han
-is_menu = status
 platform_number_of_level = 0
 class Platform(pygame.sprite.Sprite):
 	def __init__(self, X, Y, img):
@@ -94,6 +93,7 @@ def create_levels():
 
 	list_water_level[1].append(Platform(581,HEIGHT - 45, water_img))
 	list_water_level[1].append(Platform(913,HEIGHT - 45, water_img))
+	list_water_level[1].append(Platform(1245,HEIGHT - 45, water_img))
 
 	list_platform_level[1].append(Platform(249 + distance, HEIGHT - 50, forest_platform_img))
 	distance += 166
@@ -127,7 +127,46 @@ def create_levels():
 
 
 	#третий уровень
-	distance = 0
+	distance = 80
+	list_platform_level.append([])
+	list_water_level.append([])
+	list_ships_level.append([])
+	list_chicken_level.append([])
+	list_back_level.append([])
+	strawberry_level.append([])
+	simple_carrot_level.append([])
+	blue_carrot_level.append([])
+	for i in range(3):
+		list_platform_level[2].append(Platform(distance, HEIGHT - 50, dessert_platform_img))
+		distance += 160
+	distance += 3
+	for i in range(3):
+		list_water_level[2].append(Platform(distance, HEIGHT - 45, water_img))
+		distance += 166
+	distance -= 6
+	for i in range(4):
+		list_platform_level[2].append(Platform(distance, HEIGHT - 50, dessert_platform_img))
+		distance += 160
+	list_ships_level[2].append(Platform(60, HEIGHT - 85, cactus_img))
+	list_ships_level[2].append(Platform(160, HEIGHT - 60, cactus_img))
+	list_ships_level[2].append(Platform(240, HEIGHT - 95, cactus_img))
+	list_ships_level[2].append(Platform(1040, HEIGHT - 95, cactus_img))
+	list_ships_level[2].append(Platform(1300, HEIGHT - 65, cactus_img))
+
+
+	list_back_level[2].append(Platform(80, HEIGHT - 235, palma_img))
+	list_back_level[2].append(Platform(320, HEIGHT - 135, palma_img))
+	list_platform_level[2].append(Platform(80, HEIGHT - 335, invisible_platform_img))
+	list_platform_level[2].append(Platform(310, HEIGHT - 245, invisible_platform_img))
+	list_platform_level[2].append(Platform(1040, HEIGHT - 335, invisible_platform_img))
+	list_platform_level[2].append(Platform(1400, HEIGHT - 235, invisible_platform_img))
+	list_back_level[2].append(Platform(1040, HEIGHT - 235, palma_img))
+	list_back_level[2].append(Platform(1400, HEIGHT - 135, palma_img))
+	blue_carrot_level[2].append(Item(80, HEIGHT - 355, blue_carrot_img))
+	strawberry_level[2].append(Item(1400, HEIGHT - 73, strawberry_img))
+
+	#заглушка
+	distance = 80
 	list_platform_level.append([])
 	list_water_level.append([])
 	list_ships_level.append([])
@@ -158,7 +197,5 @@ def create_level(number_of_level):
 		all_sprites.add(strawberry_level[number_of_level])
 		for i in range(list_chicken_level[number_of_level].__len__()):
 			all_sprites.add(list_chicken_level[number_of_level][i])
-	else:
-		is_menu = "Final"
 
 

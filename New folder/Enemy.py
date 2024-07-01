@@ -36,8 +36,11 @@ class Han(pygame.sprite.Sprite):
 
         collisions = pygame.sprite.spritecollide(self, bad_for_chicken, False)
         if collisions:
+            channel.play(sound_han)
             self.kill()
             list_chicken_level[self.number_level].remove(self)
+            pygame.time.delay(500)
+
 
     def draw(self, displaySurface):
         displaySurface.blit(self.image, self.rect)

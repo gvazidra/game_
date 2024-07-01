@@ -11,11 +11,10 @@ SPEED_HAN = 2
 PLAYER_SPEED = 4
 SPEED_CARROT = 20
 FPS = 25
-start_x = 440
-start_y = HEIGHT - 95
+start_x = 430
+start_y = HEIGHT - 145
 number_of_level = 0
 #построение уровня
-status = 'Main_menu'
 all_sprites = pygame.sprite.Group()
 bad_for_chicken = pygame.sprite.Group()
 list_platform_level = [[]]
@@ -74,6 +73,12 @@ big_tree2_img  = pygame.image.load(os.path.join(img_folder, 'big_tree2.png')).co
 big_tree3_img  = pygame.image.load(os.path.join(img_folder, 'big_tree3.png')).convert()
 little_tree_img  = pygame.image.load(os.path.join(img_folder, 'little_tree.png')).convert()
 big_cust_img  = pygame.image.load(os.path.join(img_folder, 'big_cust.png')).convert()
+dessert_platform_img  = pygame.image.load(os.path.join(img_folder, 'dessert_platform.png')).convert()
+palma_img  = pygame.image.load(os.path.join(img_folder, 'palma.png')).convert()
+cactus_img  = pygame.image.load(os.path.join(img_folder, 'cactus.png')).convert()
+
+
+
 
 
 
@@ -88,6 +93,12 @@ channel = pygame.mixer.find_channel()
 sound_pig = [pygame.mixer.Sound(sound_floders + f"\pig_sound_{i}.ogg") for i in range(1, 4)]
 channel = pygame.mixer.find_channel()
 channel.set_volume(4 / 9)
+
+sound_victory = pygame.mixer.Sound(sound_floders + '\\victory_sound.ogg')
+sound_eat = pygame.mixer.Sound(sound_floders + '\\eat_sound.ogg')
+sound_hurt = pygame.mixer.Sound(sound_floders + '\\hurt_sound.ogg')
+sound_han = pygame.mixer.Sound(sound_floders + '\\han_sound.ogg')
+sound_water = pygame.mixer.Sound(sound_floders + '\\water_sound.ogg')
 
 #pygame.mixer.init()
 

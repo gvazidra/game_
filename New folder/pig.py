@@ -110,23 +110,33 @@ class Player(pygame.sprite.Sprite):
 
         collisions_bluecarrot = pygame.sprite.spritecollide(self, blue_carrot_level[self.number_of_level], False)
         if collisions_bluecarrot:
+            channel.play(sound_eat)
             self.water_ability = 0
             for item in collisions_bluecarrot:
                 item.kill()
                 blue_carrot_level[self.number_of_level].remove(item)
+            for water in list_water_level[self.number_of_level]:
+                list_platform_level[self.number_of_level].append(water)
+            pygame.time.delay(500)
+
+
 
 
         collisions_carrot = pygame.sprite.spritecollide(self, simple_carrot_level[self.number_of_level], False)
         if collisions_carrot:
+            channel.play(sound_eat)
             self.shoot_ability = 1
             for item in collisions_carrot:
                 item.kill()
                 simple_carrot_level[self.number_of_level].remove(item)
+            pygame.time.delay(500)
+
 
 
 
         collisions_water = pygame.sprite.spritecollide(self, list_water_level[self.number_of_level], False)
         if collisions_water and self.water_ability:
+            channel.play(sound_water)
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
@@ -134,6 +144,7 @@ class Player(pygame.sprite.Sprite):
 
         collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[self.number_of_level], False)
         if collisions_ships:
+            channel.play(sound_hurt)
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
@@ -141,6 +152,7 @@ class Player(pygame.sprite.Sprite):
 
         collisions_chicken = pygame.sprite.spritecollide(self, list_chicken_level[self.number_of_level], False)
         if collisions_chicken:
+            channel.play(sound_hurt)
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
@@ -173,6 +185,7 @@ class Player(pygame.sprite.Sprite):
 
         collisions_strawberry = pygame.sprite.spritecollide(self, strawberry_level[self.number_of_level], False)
         if collisions_strawberry:
+            channel.play(sound_victory)
             pygame.time.delay(1500)
             for item in collisions_carrot:
                 item.kill()

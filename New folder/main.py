@@ -5,7 +5,7 @@ from carrot import *
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 player = Player()
-is_menu = status
+
 carrots = pygame.sprite.Group()
 font = pygame.font.Font(None, 36)
 def game():
@@ -65,8 +65,16 @@ def main():
                         is_menu = 'Game'
                     if is_menu == 'Difficulty_menu':
                         is_menu = 'Main_menu'
-                    if is_menu == 'Loss':
-                        running = False
+                    if is_menu == 'Loss' or is_menu == 'Win':
+                        player.water_ability = 1
+                        player.shoot_ability = 0
+                        player.life_amount = 1
+                        player.number_of_level = 0
+                        player.rect.center = (start_x, start_y)
+                        number_of_level = 0
+                        Is_choose = False
+                        virtual_surface.fill((40, 40, 150))
+                        is_menu = 'Main_menu'
                     if is_menu == 'Volume_setting':
                         virtual_surface.fill((40, 40, 150))
                         is_menu = 'Option_menu'
@@ -225,7 +233,21 @@ def main():
             continue_text = small_font.render("Нажмите Escape, чтобы выйти", True, WHITE)
             continue_rect = continue_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2 + 100))
             virtual_surface.blit(continue_text, continue_rect)
-            
+
+        if player.number_of_level == 3:
+            channel.stop()
+            virtual_surface.fill((40, 40, 150))
+            is_menu = "Win"
+            small_font = pygame.font.Font(None, 36)
+            large_font = pygame.font.Font(None, 72)
+            game_over_text = large_font.render("Вы выиграли!", True, WHITE)
+            game_over_rect = game_over_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2))
+            virtual_surface.blit(game_over_text, game_over_rect)
+            continue_text = small_font.render("Нажмите Escape, чтобы выйти", True, WHITE)
+            continue_rect = continue_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2 + 100))
+            virtual_surface.blit(continue_text, continue_rect)
+            channel.play(sound_victory)
+
 
         #CURRENT_SIZE = screen.get_size()
         CURRENT_SIZE = (WIDTH, HEIGHT)

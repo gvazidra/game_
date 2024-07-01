@@ -1,4 +1,5 @@
 from connectionAssets import *
+import  connectionAssets
 class Item(pygame.sprite.Sprite):
 	def __init__(self, X, Y, img):
 		super().__init__()

@@ -14,14 +14,15 @@ FPS = 25
 start_x = 440
 start_y = HEIGHT - 95
 number_of_level = 0
-
-#РїРѕСЃС‚СЂРѕРµРЅРёРµ СѓСЂРѕРІРЅСЏ
+#построение уровня
+status = 'Main_menu'
 all_sprites = pygame.sprite.Group()
 bad_for_chicken = pygame.sprite.Group()
 list_platform_level = [[]]
 list_ships_level = [[]]
 list_water_level = [[]]
 list_chicken_level = [[]]
+list_back_level = [[]]
 blue_carrot_level = [[]]
 simple_carrot_level = [[]]
 strawberry_level = [[]]
@@ -36,7 +37,7 @@ pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 
-#РїСЂРѕСЂРёСЃРѕРІРєР° РѕРєРЅР°
+#прорисовка окна
 virtual_surface = Surface((WIDTH, HEIGHT))
 
 FULL_SCREEN_SIZE = (info.current_w, info.current_h)
@@ -65,7 +66,17 @@ blue_carrot_img = pygame.image.load(os.path.join(img_folder, 'blue_carrot.png'))
 strawberry_img = pygame.image.load(os.path.join(img_folder, 'strawberry.png')).convert()
 simple_carrot_img = pygame.image.load(os.path.join(img_folder, 'simple_carrot.png')).convert()
 water_img  = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
-#пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+forest_platform_img  = pygame.image.load(os.path.join(img_folder, 'forest_platform.png')).convert()
+invisible_platform_img  = pygame.image.load(os.path.join(img_folder, 'invisible_platform.png')).convert()
+cust_img  = pygame.image.load(os.path.join(img_folder, 'cust.png')).convert()
+big_tree1_img  = pygame.image.load(os.path.join(img_folder, 'big_tree1.png')).convert()
+big_tree2_img  = pygame.image.load(os.path.join(img_folder, 'big_tree2.png')).convert()
+big_tree3_img  = pygame.image.load(os.path.join(img_folder, 'big_tree3.png')).convert()
+little_tree_img  = pygame.image.load(os.path.join(img_folder, 'little_tree.png')).convert()
+big_cust_img  = pygame.image.load(os.path.join(img_folder, 'big_cust.png')).convert()
+
+
+
 
 sound_floders = os.path.join(game_folder, 'sounds')
 sound_walk_pig = pygame.mixer.Sound(sound_floders + '\\pig_walk_sound.ogg')

@@ -2,11 +2,10 @@ from pig import *
 from platform import *
 from button import *
 from carrot import *
-
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 player = Player()
-
+is_menu = status
 carrots = pygame.sprite.Group()
 font = pygame.font.Font(None, 36)
 def game():
@@ -17,9 +16,9 @@ def game():
     draw_hearts(player.life_amount)
 
 def main():
-    pygame.FULLSCREEN
     global last_shot_time
     last_shot_time = pygame.time.get_ticks()
+    global is_menu
     is_menu = 'Main_menu'
     running = True
     water_used = False
@@ -54,7 +53,7 @@ def main():
 
                             all_sprites.add(carrot)
                             last_shot_time = current_time
-                if event.key == pygame.K_ESCAPE:  #ИЗМЕНИЛ
+                if event.key == pygame.K_ESCAPE:
                 #channel.stop()
                     if is_menu == 'Main_menu':
                         running = False
@@ -110,7 +109,7 @@ def main():
                         player.life_amount = 5
                         number_of_level = 0
                         create_levels()
-                        create_level()
+                        create_level(0)
                         Is_choose = True
                         channel.play(sound_button)
                     if normal_button.is_clicked(mouse_pos):
@@ -118,7 +117,7 @@ def main():
                             player.life_amount = 3
                             number_of_level = 0
                             create_levels()
-                            create_level()
+                            create_level(0)
                             Is_choose = True
                             channel.play(sound_button)
                     if hard_button.is_clicked(mouse_pos):
@@ -126,7 +125,7 @@ def main():
                             player.life_amount = 1
                             number_of_level = 0
                             create_levels()
-                            create_level()
+                            create_level(0) #НАДО ПОМЕНЯТЬ НА 0
                             Is_choose = True
                             channel.play(sound_button)
                 elif is_menu == 'Volume_setting':
@@ -219,6 +218,7 @@ def main():
             virtual_surface.fill((12, 12, 12))
             is_menu = "Loss"
             small_font = pygame.font.Font(None, 36)
+            large_font = pygame.font.Font(None, 72)
             game_over_text = large_font.render("Вы проиграли!", True, WHITE)
             game_over_rect = game_over_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2))
             virtual_surface.blit(game_over_text, game_over_rect)
@@ -232,7 +232,6 @@ def main():
         scaled_surface = transform.scale(virtual_surface,CURRENT_SIZE)
         screen.blit(scaled_surface, (0,0))
         pygame.display.flip()
-
     pygame.quit()
     
     

@@ -3,7 +3,7 @@ import os
 from connectionAssets import *
 
 class Han(pygame.sprite.Sprite):
-    def __init__(self, position, moveRight, borderL, borderR):
+    def __init__(self, position, moveRight, borderL, borderR, number_level):
         pygame.sprite.Sprite.__init__(self)
         self.movingRight = moveRight
         enemyImage = pygame.image.load(os.path.join(img_folder, 'chicken.png')).convert()
@@ -16,6 +16,7 @@ class Han(pygame.sprite.Sprite):
         self.rect.x, self.rect.y = position
         self.borderL = borderL
         self.borderR = borderR
+        self.number_level = number_level
 
 
     def update(self):
@@ -36,7 +37,7 @@ class Han(pygame.sprite.Sprite):
         collisions = pygame.sprite.spritecollide(self, bad_for_chicken, False)
         if collisions:
             self.kill()
-            list_chicken_level[number_of_level].remove(self)
+            list_chicken_level[self.number_level].remove(self)
 
     def draw(self, displaySurface):
         displaySurface.blit(self.image, self.rect)

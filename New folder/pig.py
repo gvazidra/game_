@@ -1,9 +1,10 @@
 from platform import *
 from carrot import *
-global number_of_level
+from connectionAssets import *
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         self.life_amount = 3
+        self.number_of_level = 0#мюдн онлемърэ мю 0
         self.water_ability = 1
         self.shoot_ability = 0
         pygame.sprite.Sprite.__init__(self)
@@ -31,7 +32,6 @@ class Player(pygame.sprite.Sprite):
         self.update()
     
     def move(self, k):
-        print((k+1) // 2)
         self.image = pygame.transform.flip(self.images[self.i], (k+1) // 2, False)
         self.image.set_colorkey(BLACK)
         self.i += 1
@@ -54,7 +54,7 @@ class Player(pygame.sprite.Sprite):
         # check vertical collusions with platforms
         if not self.isJump:
             self.on_side = 0
-        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[self.number_of_level], False)
         for platform in collisions_platform:
             if abs(self.speed_y) > 0 and self.rect.bottom > platform.rect.top and self.rect.top < platform.rect.top and not self.on_side:
                 self.rect.bottom = platform.rect.top
@@ -97,7 +97,7 @@ class Player(pygame.sprite.Sprite):
             if self.jumpCount > 0:
                 self.rect.y -= (self.jumpCount ** 2) // 2
                 self.jumpCount -= 1
-            elif not pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False):
+            elif not pygame.sprite.spritecollide(self, list_platform_level[self.number_of_level], False):
                 self.rect.y += (self.jumpCount ** 2) // 2
                 self.is_on_ground()
                 self.jumpCount -= 1
@@ -108,48 +108,38 @@ class Player(pygame.sprite.Sprite):
             self.jumpSound = 0
             self.jumpCount = 10
 
-        collisions_bluecarrot = pygame.sprite.spritecollide(self, blue_carrot_level[number_of_level], False)
+        collisions_bluecarrot = pygame.sprite.spritecollide(self, blue_carrot_level[self.number_of_level], False)
         if collisions_bluecarrot:
             self.water_ability = 0
             for item in collisions_bluecarrot:
                 item.kill()
-                blue_carrot_level[number_of_level].remove(item)
+                blue_carrot_level[self.number_of_level].remove(item)
 
 
-        collisions_carrot = pygame.sprite.spritecollide(self, simple_carrot_level[number_of_level], False)
+        collisions_carrot = pygame.sprite.spritecollide(self, simple_carrot_level[self.number_of_level], False)
         if collisions_carrot:
             self.shoot_ability = 1
             for item in collisions_carrot:
                 item.kill()
-                simple_carrot_level[number_of_level].remove(item)
+                simple_carrot_level[self.number_of_level].remove(item)
 
-        collisions_strawberry = pygame.sprite.spritecollide(self, strawberry_level[number_of_level], False)
-        if collisions_strawberry:
-            pygame.time.delay(1500)
-            for item in collisions_carrot:
-                item.kill()
-                strawberry_level[number_of_level].remove(item)
-            self.shoot_ability = 0
-            self.water_ability = 1
-            self.rect.center = (start_x, start_y)
-            #number_of_level += 1 рср опнакелю
-            create_level()
 
-        collisions_water = pygame.sprite.spritecollide(self, list_water_level[number_of_level], False)
+
+        collisions_water = pygame.sprite.spritecollide(self, list_water_level[self.number_of_level], False)
         if collisions_water and self.water_ability:
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
-        collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[number_of_level], False)
+        collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[self.number_of_level], False)
         if collisions_ships:
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
-        collisions_chicken = pygame.sprite.spritecollide(self, list_chicken_level[number_of_level], False)
+        collisions_chicken = pygame.sprite.spritecollide(self, list_chicken_level[self.number_of_level], False)
         if collisions_chicken:
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
@@ -157,7 +147,7 @@ class Player(pygame.sprite.Sprite):
             self.life_amount -= 1
 
         # Check horizontal collisions
-        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[self.number_of_level], False)
         if not collisions_platform:
             self.on_side = 0
         for platform in collisions_platform:
@@ -180,6 +170,18 @@ class Player(pygame.sprite.Sprite):
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
+
+        collisions_strawberry = pygame.sprite.spritecollide(self, strawberry_level[self.number_of_level], False)
+        if collisions_strawberry:
+            pygame.time.delay(1500)
+            for item in collisions_carrot:
+                item.kill()
+                strawberry_level[self.number_of_level].remove(item)
+            self.shoot_ability = 0
+            self.water_ability = 1
+            self.rect.center = (start_x, start_y)
+            self.number_of_level += 1
+            create_level(self.number_of_level)
 
 
     def shoot_carrot(self):

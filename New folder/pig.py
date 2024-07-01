@@ -20,6 +20,8 @@ class Player(pygame.sprite.Sprite):
         self.dir = -1
         self.speed_x = 0
         self.speed_y = 0
+        self.on_side = 0
+        self.ready_to_jump = True
     
     def move(self, k):
         print((k+1) // 2)
@@ -43,12 +45,20 @@ class Player(pygame.sprite.Sprite):
 
     def is_on_ground(self):
         # check vertical collusions with platforms
+        if not self.isJump:
+            self.on_side = 0
         collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
         for platform in collisions_platform:
-            if abs(self.speed_y) > 0 and self.rect.bottom >= platform.rect.top and self.rect.top <= platform.rect.bottom:
+            if abs(self.speed_y) > 0 and self.rect.bottom > platform.rect.top and self.rect.top < platform.rect.top and not self.on_side:
                 self.rect.bottom = platform.rect.top
                 self.speed_y = 0
                 self.isJump = False
+                self.ready_to_jump = False
+            elif abs(self.speed_y) > 0 and self.rect.top < platform.rect.bottom and self.rect.bottom > platform.rect.bottom and not self.on_side:
+                self.rect.top = platform.rect.bottom
+                self.speed_y = 0
+                self.isJump = False
+
     def update(self):
 
         self.is_on_ground()
@@ -68,12 +78,15 @@ class Player(pygame.sprite.Sprite):
                 channel0.stop()
 
         if keys[pygame.K_SPACE]:
-            self.speed_y = -PLAYER_SPEED
-            if self.jumpSound == 0 and channel0.get_sound() != sound_button:
-                channel1.play(sound_pig[random.randint(0, 2)])
-            self.jumpSound = 1
-            self.isJump = True
-        if self.isJump is True:
+            if not self.ready_to_jump:
+                self.speed_y = -PLAYER_SPEED
+                if self.jumpSound == 0 and channel0.get_sound() != sound_button:
+                    channel1.play(sound_pig[random.randint(0, 2)])
+                self.jumpSound = 1
+                self.isJump = True
+                self.ready_to_jump = True
+
+        if self.isJump and self.ready_to_jump:
             if self.jumpCount > 0:
                 self.rect.y -= (self.jumpCount ** 2) // 2
                 self.jumpCount -= 1
@@ -137,18 +150,23 @@ class Player(pygame.sprite.Sprite):
 
         # Check horizontal collisions
         collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        if not collisions_platform:
+            self.on_side = 0
         for platform in collisions_platform:
             if self.speed_x > 0 and self.rect.right > platform.rect.left and self.rect.left < platform.rect.right and self.speed_y == 0:
                 self.rect.right = platform.rect.left
                 self.speed_x = 0
+                self.on_side = 1
             elif self.speed_x < 0 and self.rect.left < platform.rect.right and self.rect.right > platform.rect.left and self.speed_y == 0:
                 self.rect.left = platform.rect.right
                 self.speed_x = 0
+                self.on_side = 1
 
         # Gravity effect
         if not self.isJump:
             self.speed_y = 24
             self.rect.y += self.speed_y
+            #self.is_on_ground()
         if self.rect.top >= 1080:
             pygame.time.delay(300)
             self.rect.center = (start_x, start_y)

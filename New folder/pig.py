@@ -8,7 +8,8 @@ class Player(pygame.sprite.Sprite):
         self.shoot_ability = 0
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
-        self.image = player_img_set[1]
+        self.images = player_img_set_1
+        self.image = self.images[1]
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.rect.center = (start_x, start_y)
@@ -23,23 +24,29 @@ class Player(pygame.sprite.Sprite):
         self.on_side = 0
         self.ready_to_jump = True
     
+    def skins_update(self, skins):
+        self.images = skins
+        self.image = self.images[self.i]
+        self.image.set_colorkey(BLACK)
+        self.update()
+    
     def move(self, k):
         print((k+1) // 2)
-        self.image = pygame.transform.flip(player_img_set[self.i], (k+1) // 2, False)
+        self.image = pygame.transform.flip(self.images[self.i], (k+1) // 2, False)
         self.image.set_colorkey(BLACK)
         self.i += 1
         if self.i == 3:
             self.i = 0
-        if not channel0.get_busy() and channel0.get_sound() != sound_button:
-            channel0.play(sound_walk_pig)
+        if not channel.get_busy() and channel.get_sound() != sound_button:
+            channel.play(sound_walk_pig)
         self.rect.x += self.speed * k
         if self.speed < 15:
             self.speed += 1
     
     def jump(self):
         if self.jumpSound == 0:
-                channel0.stop()
-                channel1.play(sound_pig[random.randint(0, 2)])
+                channel.stop()
+                channel.play(sound_pig[random.randint(0, 2)])
                 self.jumpSound = 1
         self.isJump = True
 
@@ -74,14 +81,14 @@ class Player(pygame.sprite.Sprite):
             self.speed_x = PLAYER_SPEED
         else:
             self.speed = 4
-            if not self.isJump is True and channel0.get_sound() != sound_button:
-                channel0.stop()
+            if not self.isJump is True and channel.get_sound() != sound_button:
+                channel.stop()
 
         if keys[pygame.K_SPACE]:
             if not self.ready_to_jump:
                 self.speed_y = -PLAYER_SPEED
-                if self.jumpSound == 0 and channel0.get_sound() != sound_button:
-                    channel1.play(sound_pig[random.randint(0, 2)])
+                if self.jumpSound == 0 and channel.get_sound() != sound_button:
+                    channel.play(sound_pig[random.randint(0, 2)])
                 self.jumpSound = 1
                 self.isJump = True
                 self.ready_to_jump = True
@@ -97,7 +104,7 @@ class Player(pygame.sprite.Sprite):
 
         else:
             self.is_on_ground()
-            channel1.stop()
+            channel.stop()
             self.jumpSound = 0
             self.jumpCount = 10
 
@@ -107,6 +114,7 @@ class Player(pygame.sprite.Sprite):
             for item in collisions_bluecarrot:
                 item.kill()
                 blue_carrot_level[number_of_level].remove(item)
+
 
         collisions_carrot = pygame.sprite.spritecollide(self, simple_carrot_level[number_of_level], False)
         if collisions_carrot:
@@ -124,28 +132,28 @@ class Player(pygame.sprite.Sprite):
             self.shoot_ability = 0
             self.water_ability = 1
             self.rect.center = (start_x, start_y)
-            #number_of_level += 1 Ð¢Ð£Ð¢ ÐŸÐ ÐžÐ‘Ð›Ð•ÐœÐ
+            #number_of_level += 1 ÒÓÒ ÏÐÎÁËÅÌÀ
             create_level()
 
         collisions_water = pygame.sprite.spritecollide(self, list_water_level[number_of_level], False)
         if collisions_water and self.water_ability:
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
-            channel1.play(sound_pig[random.randint(0, 2)])
+            channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
         collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[number_of_level], False)
         if collisions_ships:
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
-            channel1.play(sound_pig[random.randint(0, 2)])
+            channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
         collisions_chicken = pygame.sprite.spritecollide(self, list_chicken_level[number_of_level], False)
         if collisions_chicken:
             pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
-            channel1.play(sound_pig[random.randint(0, 2)])
+            channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
         # Check horizontal collisions
@@ -170,7 +178,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.top >= 1080:
             pygame.time.delay(300)
             self.rect.center = (start_x, start_y)
-            channel1.play(sound_pig[random.randint(0, 2)])
+            channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
 
 
@@ -178,5 +186,3 @@ class Player(pygame.sprite.Sprite):
         if self.shoot_ability:
          carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
          return carrot
-
-

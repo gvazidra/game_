@@ -9,17 +9,12 @@ player = Player()
 
 carrots = pygame.sprite.Group()
 font = pygame.font.Font(None, 36)
-
-
 def game():
     all_sprites.add(player)
     all_sprites.update()
     virtual_surface.blit(background_img, (0, 0))
     all_sprites.draw(virtual_surface)
-    life_text = font.render(f"Lives: {player.life_amount}", True, (0, 0, 0))
-    life_rect = life_text.get_rect()
-    life_rect.midtop = (100, 36)
-    virtual_surface.blit(life_text, life_rect)
+    draw_hearts(player.life_amount)
 
 def main():
     pygame.FULLSCREEN
@@ -60,7 +55,7 @@ def main():
                             all_sprites.add(carrot)
                             last_shot_time = current_time
                 if event.key == pygame.K_ESCAPE:  #ИЗМЕНИЛ
-                #channel0.stop()
+                #channel.stop()
                     if is_menu == 'Main_menu':
                         running = False
                     if is_menu == 'Option_menu':
@@ -73,6 +68,12 @@ def main():
                         is_menu = 'Main_menu'
                     if is_menu == 'Loss':
                         running = False
+                    if is_menu == 'Volume_setting':
+                        virtual_surface.fill((40, 40, 150))
+                        is_menu = 'Option_menu'
+                    if is_menu == 'Graph_menu':
+                        virtual_surface.fill((40, 40, 150))
+                        is_menu = 'Option_menu'
 
 
 
@@ -83,23 +84,26 @@ def main():
                         running = False
                     elif option_button.is_clicked(mouse_pos):
                         is_menu = 'Option_menu'
-                        channel0.play(sound_button)
+                        channel.play(sound_button)
                     elif play_button.is_clicked(mouse_pos) and Is_choose == False:
-                        channel0.play(sound_button)
+                        channel.play(sound_button)
                         is_menu = 'Difficulty_menu'
                     elif play_button.is_clicked(mouse_pos) and Is_choose == True:
-                        channel0.play(sound_button)
+                        channel.play(sound_button)
                         is_menu = 'Game'
                 elif is_menu == 'Option_menu':
+                    if volume_button.is_clicked(mouse_pos):
+                        channel.play(sound_button)
+                        is_menu = 'Volume_setting'
                     if quit_button.is_clicked(mouse_pos):
                         is_menu = 'Main_menu'
-                        channel0.play(sound_button)
-                    elif volume_button1.is_clicked(mouse_pos):
-                        pass
+                        channel.play(sound_button)
+                    if graph_button.is_clicked(mouse_pos):
+                        is_menu = 'Graph_menu'
                 elif is_menu == 'Pause_2':
                     if quit_pause_button.is_clicked(mouse_pos):
                         is_menu = 'Main_menu'
-                        channel0.play(sound_button)
+                        channel.play(sound_button)
                 elif is_menu == 'Difficulty_menu':
                     if easy_button.is_clicked(mouse_pos):
                         is_menu = 'Game'
@@ -108,7 +112,7 @@ def main():
                         create_levels()
                         create_level()
                         Is_choose = True
-                        channel0.play(sound_button)
+                        channel.play(sound_button)
                     if normal_button.is_clicked(mouse_pos):
                             is_menu = 'Game'
                             player.life_amount = 3
@@ -116,7 +120,7 @@ def main():
                             create_levels()
                             create_level()
                             Is_choose = True
-                            channel0.play(sound_button)
+                            channel.play(sound_button)
                     if hard_button.is_clicked(mouse_pos):
                             is_menu = 'Game'
                             player.life_amount = 1
@@ -124,7 +128,32 @@ def main():
                             create_levels()
                             create_level()
                             Is_choose = True
-                            channel0.play(sound_button)
+                            channel.play(sound_button)
+                elif is_menu == 'Volume_setting':
+                    if quit_button.is_clicked(mouse_pos):
+                        is_menu = 'Option_menu'
+                        virtual_surface.fill((40, 40, 150))
+                        channel.play(sound_button)
+                    if click_1[0].is_clicked(mouse_pos):
+                        channel.play(sound_button)
+                        mixer_button_1.is_clicked(1)
+                    if click_1[1].is_clicked(mouse_pos):
+                        channel.play(sound_button)
+                        mixer_button_1.is_clicked(-1)
+                    if click_2[0].is_clicked(mouse_pos):
+                        mixer_button_2.is_clicked_with_sound(1)
+                    if click_2[1].is_clicked(mouse_pos):
+                        mixer_button_2.is_clicked_with_sound(-1)
+                elif is_menu == 'Graph_menu':
+                    if quit_button.is_clicked(mouse_pos):
+                        is_menu = 'Option_menu'
+                        virtual_surface.fill((40, 40, 150))
+                        channel.play(sound_button)
+                    if click_1[0].is_clicked(mouse_pos) or click_1[1].is_clicked(mouse_pos):
+                        if player.images == player_img_set_1:
+                            player.skins_update(player_img_set_2)
+                        else:
+                            player.skins_update(player_img_set_1)
 
 
 
@@ -150,19 +179,45 @@ def main():
                 button.handle_hover(mouse_pos)
                 button.draw(virtual_surface)
         if is_menu == 'Pause_2':
-                quit_pause_button.handle_hover(mouse_pos)
-                quit_pause_button.draw(virtual_surface)
+            quit_pause_button.handle_hover(mouse_pos)
+            quit_pause_button.draw(virtual_surface)
         if is_menu == 'Difficulty_menu':
             for button in difficulty_menu_buttons:
                 button.handle_hover(mouse_pos)
                 button.draw(virtual_surface)
+        if is_menu == 'Volume_setting':
+            virtual_surface.fill((40, 40, 150))
+            mixer_button_1.draw(virtual_surface)
+            mixer_button_2.draw(virtual_surface)
+            quit_button.handle_hover(mouse_pos)
+            quit_button.draw(virtual_surface)
+            for button in click_1:
+                button.handle_hover(mouse_pos)
+                button.draw(virtual_surface)
+            for button in click_2:
+                button.handle_hover(mouse_pos)
+                button.draw(virtual_surface)
+        if is_menu == 'Graph_menu':
+            virtual_surface.fill((40, 40, 150))
+            for button in click_1:
+                button.handle_hover(mouse_pos)
+                button.draw(virtual_surface)
+            quit_button.handle_hover(mouse_pos)
+            quit_button.draw(virtual_surface)
+            if player.images == player_img_set_1:
+                virtual_surface.blit(player_img_set_1[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
+                                                           (player_img_set_1[0].get_height() // 2)))
+            else:
+                virtual_surface.blit(player_img_set_2[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
+                                                           (player_img_set_1[0].get_height() // 2)))
+
+            
 
 
         if player.life_amount <= 0:
+            channel.stop()
             virtual_surface.fill((12, 12, 12))
-            channel1.set_volume(0.0)
             is_menu = "Loss"
-            large_font = pygame.font.Font(None, 72)
             small_font = pygame.font.Font(None, 36)
             game_over_text = large_font.render("Вы проиграли!", True, WHITE)
             game_over_rect = game_over_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2))
@@ -170,6 +225,7 @@ def main():
             continue_text = small_font.render("Нажмите Escape, чтобы выйти", True, WHITE)
             continue_rect = continue_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2 + 100))
             virtual_surface.blit(continue_text, continue_rect)
+            
 
         #CURRENT_SIZE = screen.get_size()
         CURRENT_SIZE = (WIDTH, HEIGHT)

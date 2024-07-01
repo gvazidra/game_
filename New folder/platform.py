@@ -58,7 +58,7 @@ def create_levels():
 
 	simple_carrot_level[0].append(Item(450, HEIGHT - 413, simple_carrot_img))
 
-	strawberry_level[0].append(Item(900, HEIGHT - 413, strawberry_img))
+	strawberry_level[0].append(Item(1500, HEIGHT - 100, strawberry_img))
 
 	list_chicken_level[0].append(Han((1400, HEIGHT - 113), True, 1400, 1500, 0))
 

@@ -10,12 +10,21 @@ HEIGHT = info.current_h
 SPEED_HAN = 2
 PLAYER_SPEED = 4
 SPEED_CARROT = 20
-number_of_level = 0
 FPS = 25
 start_x = 440
 start_y = HEIGHT - 95
+number_of_level = 0
 
-
+#построение уровня
+all_sprites = pygame.sprite.Group()
+bad_for_chicken = pygame.sprite.Group()
+list_platform_level = [[]]
+list_ships_level = [[]]
+list_water_level = [[]]
+list_chicken_level = [[]]
+blue_carrot_level = [[]]
+simple_carrot_level = [[]]
+strawberry_level = [[]]
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -46,6 +55,8 @@ platform_img = pygame.image.load(os.path.join(img_folder, 'platform1.png')).conv
 
 ships_img = pygame.image.load(os.path.join(img_folder, 'ships.png')).convert()
 blue_carrot_img = pygame.image.load(os.path.join(img_folder, 'blue_carrot.png')).convert()
+strawberry_img = pygame.image.load(os.path.join(img_folder, 'strawberry.png')).convert()
+simple_carrot_img = pygame.image.load(os.path.join(img_folder, 'simple_carrot.png')).convert()
 water_img  = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
 #���� ��������
 
@@ -75,3 +86,13 @@ op_hover_button_img = pygame.image.load(os.path.join(img_folder, 'setting_button
 
 volume_button_img = pygame.image.load(os.path.join(img_folder, 'volume_button.png')).convert()
 volume_hover_button_img = pygame.image.load(os.path.join(img_folder, 'volume_button_triggered.png')).convert()
+
+easy_image = pygame.image.load(os.path.join(img_folder, 'easy.png')).convert()
+easy_hover_image = pygame.image.load(os.path.join(img_folder, 'easy_triggered.png')).convert()
+
+normal_image = pygame.image.load(os.path.join(img_folder, 'normal.png')).convert()
+normal_hover_image = pygame.image.load(os.path.join(img_folder, 'normal_triggered.png')).convert()
+
+hard_image = pygame.image.load(os.path.join(img_folder, 'hard.png')).convert()
+hard_hover_image = pygame.image.load(os.path.join(img_folder, 'hard_triggered.png')).convert()
+

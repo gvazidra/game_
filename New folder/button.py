@@ -30,5 +30,12 @@ option_button = Button(WIDTH // 2, HEIGHT // 2, op_button_img, op_hover_button_i
 volume_button1 = Button(WIDTH // 2, HEIGHT // 2 - 100, volume_button_img, volume_hover_button_img)
 volume_button2 = Button(WIDTH // 2, HEIGHT // 2, volume_button_img, volume_hover_button_img)
 
+easy_button = Button(WIDTH // 2, HEIGHT // 2 + 100, easy_image, easy_hover_image)
+normal_button = Button(WIDTH // 2, HEIGHT // 2, normal_image, normal_hover_image)
+hard_button = Button(WIDTH // 2, HEIGHT // 2 - 100, hard_image, hard_hover_image)
+
+difficulty_menu_buttons = [hard_button, normal_button, easy_button]
+
 main_menu_buttons = [quit_button, play_button, option_button]
+
 options_menu_buttons = [volume_button1, volume_button2, quit_button]

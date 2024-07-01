@@ -33,12 +33,14 @@ class Han(pygame.sprite.Sprite):
             self.enemyImage = pygame.transform.flip(self.enemyImage, True, False)
             self.image = self.enemyImage
 
+        collisions = pygame.sprite.spritecollide(self, bad_for_chicken, False)
+        if collisions:
+            self.kill()
+            list_chicken_level[number_of_level].remove(self)
+
     def draw(self, displaySurface):
         displaySurface.blit(self.image, self.rect)
 
-    def kill(self):
-        self.all_sprites.remove(self)
-        self.chickens.remove(self)
 
 
 

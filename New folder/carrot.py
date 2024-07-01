@@ -27,5 +27,6 @@ class Carrot(pygame.sprite.Sprite):
             self.kill()
 
 
+
     def draw(self, screen):
         screen.blit(self.image, self.rect)

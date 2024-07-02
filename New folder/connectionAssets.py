@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from pygame import *
 import os
 import pygame
@@ -14,7 +16,7 @@ FPS = 25
 start_x = 430
 start_y = HEIGHT - 145
 number_of_level = 0
-#построение уровня
+#РїРѕСЃС‚СЂРѕРµРЅРёРµ СѓСЂРѕРІРЅСЏ
 all_sprites = pygame.sprite.Group()
 bad_for_chicken = pygame.sprite.Group()
 list_platform_level = [[]]
@@ -36,7 +38,7 @@ pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 
-#прорисовка окна
+#РїСЂРѕСЂРёСЃРѕРІРєР° РѕРєРЅР°
 virtual_surface = Surface((WIDTH, HEIGHT))
 
 FULL_SCREEN_SIZE = (info.current_w, info.current_h)

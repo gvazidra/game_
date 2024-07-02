@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from connectionAssets import *
+
 class Button:
     def __init__(self, center_x, center_y, image, hover_image):
         self.center_x = center_x
@@ -16,6 +19,8 @@ class Button:
         current_image = self.hover_image if self.is_hovered else self.image
         virtual_surface.blit(current_image, (self.x, self.y))
 
+
+
     def is_clicked(self, mouse_pos):
         button_rect = self.image.get_rect(center=(self.center_x, self.center_y))
         return button_rect.collidepoint(mouse_pos)
@@ -28,8 +33,8 @@ class MixerButton():
         self.center_x = center_x
         self.center_y = center_y
         self.k = 4
-        self.images = image  # предполагается, что image - список из 4 изображений
-        self.image = self.images[self.k]  # изображение по умолчанию
+        self.images = image  # РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ image - СЃРїРёСЃРѕРє РёР· 4 РёР·РѕР±СЂР°Р¶РµРЅРёР№
+        self.image = self.images[self.k]  # РёР·РѕР±СЂР°Р¶РµРЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
         self.image.set_colorkey(BLACK)
         self.width, self.height = self.image.get_size()
         self.x = center_x - self.width // 2

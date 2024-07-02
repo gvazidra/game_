@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from connectionAssets import *
 import  connectionAssets
 class Item(pygame.sprite.Sprite):

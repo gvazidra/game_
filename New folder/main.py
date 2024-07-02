@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from pig import *
 from platform import *
 from button import *
 from carrot import *
+
 pygame.display.set_caption("My Game")
 clock = pygame.time.Clock()
 player = Player()

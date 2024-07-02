@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pygame
 import os
 from connectionAssets import *
@@ -39,7 +41,7 @@ class Han(pygame.sprite.Sprite):
             channel.play(sound_han)
             self.kill()
             list_chicken_level[self.number_level].remove(self)
-            pygame.time.delay(500)
+            #pygame.time.delay(500)
 
 
     def draw(self, displaySurface):

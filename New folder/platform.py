@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Item import *
 from Enemy import Han
 platform_number_of_level = 0
@@ -61,7 +62,7 @@ def create_levels():
 
 	list_chicken_level[0].append(Han((1400, HEIGHT - 113), True, 1400, 1500, 0))
 
-	# второй уровень
+	# РІС‚РѕСЂРѕР№ СѓСЂРѕРІРµРЅСЊ
 	distance = 0
 	list_platform_level.append([])
 	list_water_level.append([])
@@ -126,7 +127,7 @@ def create_levels():
 	simple_carrot_level[1].append(Item(1411, HEIGHT - 83, simple_carrot_img))
 
 
-	#третий уровень
+	#С‚СЂРµС‚РёР№ СѓСЂРѕРІРµРЅСЊ
 	distance = 80
 	list_platform_level.append([])
 	list_water_level.append([])
@@ -165,7 +166,7 @@ def create_levels():
 	blue_carrot_level[2].append(Item(80, HEIGHT - 355, blue_carrot_img))
 	strawberry_level[2].append(Item(1400, HEIGHT - 73, strawberry_img))
 
-	#заглушка
+	#Р·Р°РіР»СѓС€РєР°
 	distance = 80
 	list_platform_level.append([])
 	list_water_level.append([])

@@ -53,25 +53,8 @@ class Player(pygame.sprite.Sprite):
                 self.jumpSound = 1
         self.isJump = True
 
-    def is_on_ground(self):
-        # check vertical collusions with platforms
-        if not self.isJump:
-            self.on_side = 0
-        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[self.number_of_level], False)
-        for platform in collisions_platform:
-            if abs(self.speed_y) > 0 and self.rect.bottom > platform.rect.top and self.rect.top < platform.rect.top and not self.on_side:
-                self.rect.bottom = platform.rect.top
-                self.speed_y = 0
-                self.isJump = False
-                self.ready_to_jump = False
-            elif abs(self.speed_y) > 0 and self.rect.top < platform.rect.bottom and self.rect.bottom > platform.rect.bottom and not self.on_side:
-                self.rect.top = platform.rect.bottom
-                self.speed_y = 0
-                self.isJump = False
-
     def update(self):
 
-        self.is_on_ground()
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_LEFT]:
@@ -87,29 +70,57 @@ class Player(pygame.sprite.Sprite):
             if not self.isJump is True and channel.get_sound() != sound_button:
                 channel.stop()
 
-        if keys[pygame.K_SPACE]:
-            if not self.ready_to_jump:
-                self.speed_y = -PLAYER_SPEED
-                if self.jumpSound == 0 and channel.get_sound() != sound_button:
-                    channel.play(sound_pig[random.randint(0, 2)])
-                self.jumpSound = 1
-                self.isJump = True
-                self.ready_to_jump = True
-
-        if self.isJump and self.ready_to_jump:
-            if self.jumpCount > 0:
-                self.rect.y -= (self.jumpCount ** 2) // 2
-                self.jumpCount -= 1
-            elif not pygame.sprite.spritecollide(self, list_platform_level[self.number_of_level], False):
-                self.rect.y += (self.jumpCount ** 2) // 2
-                self.is_on_ground()
-                self.jumpCount -= 1
-
+        if keys[pygame.K_SPACE] and self.ready_to_jump:
+            self.speed_y = -30
+            if self.jumpSound == 0 and channel.get_sound() != sound_button:
+                channel.play(sound_pig[random.randint(0, 2)])
+            self.jumpSound = 1
+            self.ready_to_jump = False
         else:
-            self.is_on_ground()
-            channel.stop()
             self.jumpSound = 0
-            self.jumpCount = 10
+
+        # Gravity
+        self.speed_y += 2
+        self.rect.y += self.speed_y
+
+        # Ground detection
+        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        if collisions_platform:
+            if not self.isJump:
+                self.on_side = 0
+            for platform in collisions_platform:
+                if self.speed_y > 0 and self.rect.bottom > platform.rect.top and self.rect.top < platform.rect.top and not self.on_side:
+                    self.rect.bottom = platform.rect.top
+                    self.speed_y = 0
+                    self.ready_to_jump = True
+                elif self.speed_y < 0 and self.rect.top < platform.rect.bottom and self.rect.bottom > platform.rect.bottom and not self.on_side:
+                    self.rect.top = platform.rect.bottom
+                    self.speed_y = 0
+                    self.ready_to_jump = False
+        else:
+            self.ready_to_jump = False
+
+        # Check horizontal collisions
+        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        if not collisions_platform:
+            self.on_side = False
+        if not self.isJump:
+            for platform in collisions_platform:
+                if self.speed_x > 0 and self.rect.right > platform.rect.left and self.rect.left < platform.rect.right:
+                    self.rect.right = platform.rect.left
+                    self.speed_x = 0
+                    self.on_side = True
+                elif self.speed_x < 0 and self.rect.left < platform.rect.right and self.rect.right > platform.rect.left:
+                    self.rect.left = platform.rect.right
+                    self.speed_x = 0
+                    self.on_side = True
+                    
+        # Death condition
+        if self.rect.top >= 1080:
+            pygame.time.delay(300)
+            self.rect.center = (start_x, start_y)
+            channel.play(sound_pig[random.randint(0, 2)])
+            self.life_amount -= 1
 
         collisions_bluecarrot = pygame.sprite.spritecollide(self, blue_carrot_level[self.number_of_level], False)
         if collisions_bluecarrot:
@@ -122,9 +133,6 @@ class Player(pygame.sprite.Sprite):
                 list_platform_level[self.number_of_level].append(water)
             #pygame.time.delay(500)
 
-
-
-
         collisions_carrot = pygame.sprite.spritecollide(self, simple_carrot_level[self.number_of_level], False)
         if collisions_carrot:
             channel.play(sound_eat)
@@ -133,9 +141,6 @@ class Player(pygame.sprite.Sprite):
                 item.kill()
                 simple_carrot_level[self.number_of_level].remove(item)
             #pygame.time.delay(500)
-
-
-
 
         collisions_water = pygame.sprite.spritecollide(self, list_water_level[self.number_of_level], False)
         if collisions_water and self.water_ability:
@@ -157,31 +162,6 @@ class Player(pygame.sprite.Sprite):
         if collisions_chicken:
             channel.play(sound_hurt)
             pygame.time.delay(1500)
-            self.rect.center = (start_x, start_y)
-            channel.play(sound_pig[random.randint(0, 2)])
-            self.life_amount -= 1
-
-        # Check horizontal collisions
-        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[self.number_of_level], False)
-        if not collisions_platform:
-            self.on_side = 0
-        for platform in collisions_platform:
-            if self.speed_x > 0 and self.rect.right > platform.rect.left and self.rect.left < platform.rect.right and self.speed_y == 0:
-                self.rect.right = platform.rect.left
-                self.speed_x = 0
-                self.on_side = 1
-            elif self.speed_x < 0 and self.rect.left < platform.rect.right and self.rect.right > platform.rect.left and self.speed_y == 0:
-                self.rect.left = platform.rect.right
-                self.speed_x = 0
-                self.on_side = 1
-
-        # Gravity effect
-        if not self.isJump:
-            self.speed_y = 24
-            self.rect.y += self.speed_y
-            #self.is_on_ground()
-        if self.rect.top >= 1080:
-            pygame.time.delay(300)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1

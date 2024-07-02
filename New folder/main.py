@@ -11,6 +11,7 @@ player = Player()
 carrots = pygame.sprite.Group()
 font = pygame.font.Font(None, 36)
 def game():
+    virtual_surface.fill((250, 250, 250))
     all_sprites.add(player)
     all_sprites.update()
     virtual_surface.blit(background_img, (0, 0))

@@ -1,11 +1,11 @@
 .nav-item{
-    font-family: "Sofia Sans", sans-serif;
+    font-family: "Inter Tight", sans-serif;
     font-weight: 400;
     font-size: large;
 }
 
 .navbar-brand{
-    font-family: "Sofia Sans", sans-serif;
+    font-family: "Inter Tight", sans-serif;
     font-weight: 600;
 }
 
@@ -138,3 +138,43 @@
 a {
     text-decoration: none;
 }
+
+.block {
+    background: rgb(240, 240, 240);
+    border-radius: 5vw;
+    border: solid 20px rgb(240, 240, 240);  
+    max-width: 80vw; 
+    margin: 0 auto;
+}
+h1#block{
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 600;
+    font-style: italic;
+}
+
+h2#block{
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 600;
+}
+
+
+p#block{
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+h1#number{
+    color:  rgb(74, 209, 25);
+    font-family: "Inter Tight", sans-serif;
+    font-weight: 600;
+    font-size: 6vw;
+    font-style: italic;
+}
+
+
+dialog{
+  border-radius: 20px;
+  border: 2px;
+  background: rgba(255, 255, 255, 0.802)
+  }

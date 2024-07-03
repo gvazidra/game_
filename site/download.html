@@ -10,60 +10,57 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tiny5&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
-    <title>Home</title>
+    <title>Скачать</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(201, 32, 210)"> 
     <div class="container">
-      <a class="navbar-brand">Р›СѓС‡С€Р°СЏ РёРіСЂР°!</a>
+      <a class="navbar-brand">Лучшая игра!</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="main.html">Р“Р»Р°РІРЅР°СЏ</a>
+            <a class="nav-link" href="main.html">Главная</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="game.html">Р�РіСЂР°</a>
+            <a class="nav-link" href="game.html">Игра</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">Рћ РЅР°СЃ</a>
+            <a class="nav-link" href="about.html">О нас</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active fw-bold" aria-current="page" href="download.html">РЎРєР°С‡Р°С‚СЊ</a>
+            <a class="nav-link active fw-bold" aria-current="page" href="download.html">Скачать</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="container px-4 py-5" id="featured-3">
-    <h2 class = "name_facts" style="font-size: 50;">РџР»СЋСЃС‹ РёРіСЂС‹</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-      <div class="feature col">
-        <img src="../site/files/smile-face.png" alt="РЈР»С‹Р±Р°СЋС‰РµРµСЃСЏ Р»РёС†Рѕ"  class="mx-auto d-block img-fluid mb-4" width="125px">
-        <h2 class = "texts">РЈР»С‹Р±РєР° РЅР° Р»РёС†Рµ</h2>
-        <p class = "little_texts">РљС‚Рѕ РЅРµ Р»СЋР±РёС‚ СЂРѕР·РѕРІС‹С… СЃРІРёРЅРµР№ РїСЂС‹РіР°СЋС‰РёС… РїРѕ РїР»Р°С‚С„РѕСЂРјР°Рј? Р’РµСЂРЅРѕ, РЅРёРєС‚Рѕ. Р­С‚Рѕ РёРіСЂР° РІРЅРµСЃРµС‚ РїРѕР·РёС‚РёРІ РІ РІР°С€ РґРµРЅСЊ</p>
+  <div class="container my-5">
+    <h2 class = "name_facts" style="font-size: 50;" id="download-text">Скачать игру</h2>
+    <div class = "row py-3">
+      <div class="col text-center d-flex justify-content-center">
+        <div class="image-container">
+          <a href = "https://vk.com/dreamteam_famcs" target="_blank"><img src="./files/windows-button.png" href = "https://vk.com/dreamteam_famcs" class="rounded-0" alt="..." width="150" height="50" id="window-button" style="cursor: pointer;"></a>
+          <img src="./files/android-button.png" class="rounded-0" alt="..." width="150" height="50" id="show" style="cursor: pointer;">
+          <dialog>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+              <path d="M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0"/>
+            </svg>
+            <p id="block">В данный момент версии на андроид не существует</p>
+            <button type="button" class="btn btn-dark" id="close">Жаль</button>
+          </dialog>
+          </div>
       </div>
-      <div class="feature col">
-        <img src="../site/files/github.png" alt="РЈР»С‹Р±Р°СЋС‰РµРµСЃСЏ Р»РёС†Рѕ"  class="mx-auto d-block img-fluid mb-4" width="125px">
-        <h2 class = "texts">РћС‚РєСЂС‹С‚С‹Р№ РєРѕРґ</h2>
-        <p class = "little_texts">Р’СЃСЏ РёРіСЂР°, РЅР°С‡РёРЅР°СЏ СЃ РєРѕРґР° Рё Р·Р°РєР°РЅС‡РёРІР°СЏ СЃР°Р№С‚РѕРј, РЅР°С…РѕРґРёС‚СЃСЏ РЅР° GitHub'Рµ</p>
-      </div>
-      <div class="feature col">
-        <img src="../site/files/no-wifi.png" alt="РЈР»С‹Р±Р°СЋС‰РµРµСЃСЏ Р»РёС†Рѕ"  class="mx-auto d-block img-fluid mb-4" width="125px">
-        <h2 class = "texts">Р‘РµР· РёРЅС‚РµСЂРЅРµС‚Р°</h2>
-        <p class = "little_texts"> Р�РіСЂР° РЅРµ С‚СЂРµР±СѓРµС‚ РёРЅС‚РµСЂРЅРµС‚Р°. РЎР°РјРѕРµ С‚Рѕ РґР»СЏ РґР°Р»РµРєРёС… РїСѓС‚РµС€СЃС‚РІРёР№ РёР»Рё РЅРµР±РѕР»СЊС€РёС… РїРµСЂРµСЂС‹РІРѕРІ</p>
-      </div>
-    </div>
-  </div>
 
   <footer class = "d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <div class="container">
       <h2 class = "texts">FAMCS</h2>
-      <P class="little_texts">В© Copyright 2024 11 РіСЂСѓРїРїР° - All Rights Reserved</P>
+      <P class="little_texts">В© Copyright 2024 11 группа - All Rights Reserved</P>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+  <script src="script.js"></script>
+  <script src="script_2.js"></script>
+  </body>
 </html>

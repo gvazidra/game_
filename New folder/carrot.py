@@ -26,7 +26,5 @@ class Carrot(pygame.sprite.Sprite):
         if self.rect.left > 1920 or self.rect.right < 0 or self.distance > 300:
             self.kill()
 
-
-
     def draw(self, screen):
         screen.blit(self.image, self.rect)

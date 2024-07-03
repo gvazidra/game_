@@ -2,6 +2,7 @@
 from Item import *
 from Enemy import Han
 
+
 class Platform(pygame.sprite.Sprite):
 	def __init__(self, X, Y, img):
 		super().__init__()
@@ -9,6 +10,7 @@ class Platform(pygame.sprite.Sprite):
 		self.image.set_colorkey(BLACK)
 		self.rect = self.image.get_rect()
 		self.rect.center = (X, Y)
+
 
 def create_levels():
 	all_sprites.empty()
@@ -59,7 +61,8 @@ def create_levels():
 
 	list_chicken_level[0].append(Han((1405, height_surface - 123), True, 1400, 1500, 0))
 	list_chicken_level[0].append(Han((1505, height_surface - 123), True, 1500, 1700, 0))
-	# второй уровень
+
+	# level 2
 	distance = 0
 	list_platform_level.append([])
 	list_water_level.append([])
@@ -123,8 +126,7 @@ def create_levels():
 	list_chicken_level[1].append((Han((1056, height_surface - 113), True, 996, 1100, 1)))
 	simple_carrot_level[1].append(Item(1411, height_surface - 83, simple_carrot_img))
 
-
-	#третий уровень
+	# level 3
 	distance = 80
 	list_platform_level.append([])
 	list_water_level.append([])
@@ -155,7 +157,6 @@ def create_levels():
 	list_ships_level[2].append(Platform(1300, height_surface - 65, cactus_img))
 	list_ships_level[2].append(Platform(1650, height_surface - 65, cactus_img))
 
-
 	list_back_level[2].append(Platform(80, height_surface - 235, palma_img))
 	list_back_level[2].append(Platform(320, height_surface - 135, palma_img))
 	list_platform_level[2].append(Platform(80, height_surface - 335, invisible_platform_img))
@@ -168,7 +169,7 @@ def create_levels():
 	blue_carrot_level[2].append(Item(80, height_surface - 355, blue_carrot_img))
 	strawberry_level[2].append(Item(1400, height_surface - 83, strawberry_img))
 
-	#заглушка
+	# заглушка
 	distance = 80
 	list_platform_level.append([])
 	list_water_level.append([])
@@ -180,11 +181,10 @@ def create_levels():
 	blue_carrot_level.append([])
 
 
-
 def create_level(number_of_level):
 	all_sprites.empty()
 	platform_number_of_level = number_of_level
-	if  number_of_level <= 2:
+	if number_of_level <= 2:
 
 		for i in range(list_water_level[number_of_level].__len__()):
 			all_sprites.add(list_water_level[number_of_level][i])
@@ -200,5 +200,3 @@ def create_level(number_of_level):
 		all_sprites.add(strawberry_level[number_of_level])
 		for i in range(list_chicken_level[number_of_level].__len__()):
 			all_sprites.add(list_chicken_level[number_of_level][i])
-
-

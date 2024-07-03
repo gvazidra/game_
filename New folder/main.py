@@ -10,6 +10,8 @@ player = Player()
 
 carrots = pygame.sprite.Group()
 font = pygame.font.Font(None, 36)
+
+
 def game():
     virtual_surface.fill((250, 250, 250))
     all_sprites.add(player)
@@ -17,6 +19,7 @@ def game():
     virtual_surface.blit(background_img, (0, 0))
     all_sprites.draw(virtual_surface)
     draw_hearts(player.life_amount)
+
 
 def main():
     global last_shot_time
@@ -35,8 +38,6 @@ def main():
             water_used = True
         clock.tick(FPS)
 
-
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -48,16 +49,9 @@ def main():
                         if carrot:
                             carrots.add(carrot)
                             bad_for_chicken.add(carrot)
-
-
-
-
-
-
                             all_sprites.add(carrot)
                             last_shot_time = current_time
                 if event.key == pygame.K_ESCAPE:
-                #channel.stop()
                     if is_menu == 'Main_menu':
                         running = False
                     if is_menu == 'Option_menu':
@@ -84,9 +78,6 @@ def main():
                     if is_menu == 'Graph_menu':
                         virtual_surface.fill((40, 40, 150))
                         is_menu = 'Option_menu'
-
-
-
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if is_menu == 'Main_menu':
@@ -136,7 +127,7 @@ def main():
                             player.life_amount = 1
                             number_of_level = 0
                             create_levels()
-                            create_level(0) #НАДО ПОМЕНЯТЬ НА 0
+                            create_level(0)
                             Is_choose = True
                             channel.play(sound_button)
                 elif is_menu == 'Volume_setting':
@@ -164,9 +155,6 @@ def main():
                             player.skins_update(player_img_set_2)
                         else:
                             player.skins_update(player_img_set_1)
-
-
-
             elif event.type == pygame.VIDEORESIZE:
                 global CURRENT_SIZE
                 CURRENT_SIZE = event.size
@@ -231,9 +219,6 @@ def main():
                 screen.blit(player_img_set_2[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
                                                            (player_img_set_1[0].get_height() // 2)))
 
-            
-
-
         if player.life_amount <= 0:
             channel.stop()
             virtual_surface.fill((12, 12, 12))
@@ -271,11 +256,7 @@ def main():
         pygame.display.flip()
 
     pygame.quit()
-    
-    
 
-
-    
 
 if __name__ == "__main__":
     main()

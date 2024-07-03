@@ -4,10 +4,11 @@ from platform import *
 from carrot import *
 from connectionAssets import *
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         self.life_amount = 3
-        self.number_of_level = 0#НАДО ПОМЕНЯТЬ НА 0
+        self.number_of_level = 0
         self.water_ability = 1
         self.shoot_ability = 0
         pygame.sprite.Sprite.__init__(self)
@@ -15,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.images = player_img_set_1
         self.image = self.images[1]
         self.image.set_colorkey(BLACK)
-        self.rect = self.image.get_rect()
+        self.rect = pygame.Rect(start_x, start_y, 112, 72)
         self.rect.center = (start_x, start_y)
         self.speed = 4
         self.jumpCount = 10
@@ -54,7 +55,6 @@ class Player(pygame.sprite.Sprite):
         self.isJump = True
 
     def update(self):
-
         keys = pygame.key.get_pressed()
         
         if keys[pygame.K_LEFT]:
@@ -71,7 +71,7 @@ class Player(pygame.sprite.Sprite):
                 channel.stop()
 
         if keys[pygame.K_SPACE] and self.ready_to_jump:
-            self.speed_y = -30
+            self.speed_y = -33
             if self.jumpSound == 0 and channel.get_sound() != sound_button:
                 channel.play(sound_pig[random.randint(0, 2)])
             self.jumpSound = 1
@@ -131,7 +131,6 @@ class Player(pygame.sprite.Sprite):
                 blue_carrot_level[self.number_of_level].remove(item)
             for water in list_water_level[self.number_of_level]:
                 list_platform_level[self.number_of_level].append(water)
-            #pygame.time.delay(500)
 
         collisions_carrot = pygame.sprite.spritecollide(self, simple_carrot_level[self.number_of_level], False)
         if collisions_carrot:
@@ -140,12 +139,10 @@ class Player(pygame.sprite.Sprite):
             for item in collisions_carrot:
                 item.kill()
                 simple_carrot_level[self.number_of_level].remove(item)
-            #pygame.time.delay(500)
 
         collisions_water = pygame.sprite.spritecollide(self, list_water_level[self.number_of_level], False)
         if collisions_water and self.water_ability:
             channel.play(sound_water)
-            #pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
@@ -153,7 +150,6 @@ class Player(pygame.sprite.Sprite):
         collisions_ships = pygame.sprite.spritecollide(self, list_ships_level[self.number_of_level], False)
         if collisions_ships:
             channel.play(sound_hurt)
-            #pygame.time.delay(1500)
             self.rect.center = (start_x, start_y)
             channel.play(sound_pig[random.randint(0, 2)])
             self.life_amount -= 1
@@ -178,7 +174,6 @@ class Player(pygame.sprite.Sprite):
             self.rect.center = (start_x, start_y)
             self.number_of_level += 1
             create_level(self.number_of_level)
-
 
     def shoot_carrot(self):
         if self.shoot_ability:

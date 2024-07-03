@@ -9,12 +9,15 @@ import random
 info = display.Info()
 WIDTH = info.current_w
 HEIGHT = info.current_h
+CURRENT_SIZE = (WIDTH, HEIGHT)
+height_surface = 1080
+width_surface = 1920
 SPEED_HAN = 2
 PLAYER_SPEED = 4
 SPEED_CARROT = 20
 FPS = 25
 start_x = 430
-start_y = HEIGHT - 145
+start_y = height_surface - 145
 number_of_level = 0
 #построение уровня
 all_sprites = pygame.sprite.Group()
@@ -39,13 +42,8 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 
 #прорисовка окна
-virtual_surface = Surface((WIDTH, HEIGHT))
+virtual_surface = Surface((width_surface, height_surface))
 
-FULL_SCREEN_SIZE = (info.current_w, info.current_h)
-CURRENT_SIZE = screen.get_size()
-is_fullscreen = False
-last_size = CURRENT_SIZE
-#
 
 virtual_surface.fill((40, 40, 150))
 #file upload
@@ -68,7 +66,7 @@ strawberry_img = pygame.image.load(os.path.join(img_folder, 'strawberry.png')).c
 simple_carrot_img = pygame.image.load(os.path.join(img_folder, 'simple_carrot.png')).convert()
 water_img  = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
 forest_platform_img  = pygame.image.load(os.path.join(img_folder, 'forest_platform.png')).convert()
-invisible_platform_img  = pygame.image.load(os.path.join(img_folder, 'invisible_platform.png')).convert()
+invisible_platform_img  = pygame.image.load(os.path.join(img_folder, '1.png')).convert()
 cust_img  = pygame.image.load(os.path.join(img_folder, 'cust.png')).convert()
 big_tree1_img  = pygame.image.load(os.path.join(img_folder, 'big_tree1.png')).convert()
 big_tree2_img  = pygame.image.load(os.path.join(img_folder, 'big_tree2.png')).convert()

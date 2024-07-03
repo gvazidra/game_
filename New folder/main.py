@@ -168,6 +168,7 @@ def main():
 
 
             elif event.type == pygame.VIDEORESIZE:
+                global CURRENT_SIZE
                 CURRENT_SIZE = event.size
                     
         mouse_pos = pygame.mouse.get_pos()
@@ -177,7 +178,8 @@ def main():
             game()
         if is_menu == 'Pause':
             is_menu = 'Main_menu'
-            darkness_surface = pygame.Surface((WIDTH, HEIGHT), pygame.SRCALPHA)
+            global scaled_surface
+            darkness_surface = pygame.Surface((width_surface, height_surface), pygame.SRCALPHA)
             darkness_surface.fill((0, 0, 0, 128))
             virtual_surface.blit(darkness_surface, (0, 0))
         if is_menu == 'Main_menu':
@@ -251,9 +253,7 @@ def main():
             virtual_surface.blit(continue_text, continue_rect)
             channel.play(sound_victory)
 
-
-        #CURRENT_SIZE = screen.get_size()
-        CURRENT_SIZE = (WIDTH, HEIGHT)
+        CURRENT_SIZE = screen.get_size()
         scaled_surface = transform.scale(virtual_surface,CURRENT_SIZE)
         screen.blit(scaled_surface, (0,0))
         pygame.display.flip()

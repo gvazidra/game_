@@ -27,7 +27,7 @@ class Button:
 
     def handle_hover(self, mouse_pos):
         self.is_hovered = self.is_clicked(mouse_pos)
-        
+
 class MixerButton():
     def __init__(self, center_x, center_y, image):
         self.center_x = center_x
@@ -53,7 +53,7 @@ class MixerButton():
                 self.k += 1
                 pygame.mixer.music.set_volume(self.k / 9)
         self.update_image()
-        
+
     def is_clicked_with_sound(self, i):
         if i == 1:
             if self.k > 0:
@@ -69,10 +69,10 @@ class MixerButton():
 
     def update_image(self):
         self.image = self.images[self.k]
-    
+
 
 quit_button = Button(WIDTH // 2, HEIGHT // 2 + 100, quit_button_img, quit_hover_button_img)
-quit_pause_button = Button(WIDTH // 2, HEIGHT // 2, quit_button_img, quit_hover_button_img)
+quit_pause_button = Button(WIDTH // 2,  HEIGHT// 2, quit_button_img, quit_hover_button_img)
 play_button = Button(WIDTH // 2, HEIGHT // 2 - 100, button_image, button_hover_image)
 option_button = Button(WIDTH // 2, HEIGHT // 2, op_button_img, op_hover_button_img)
 volume_button = Button(WIDTH // 2, HEIGHT // 2 - 100, volume_button_img, volume_hover_button_img)

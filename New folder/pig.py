@@ -84,7 +84,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.speed_y
 
         # Ground detection
-        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[ self.number_of_level], False)
         if collisions_platform:
             if not self.isJump:
                 self.on_side = 0
@@ -101,7 +101,7 @@ class Player(pygame.sprite.Sprite):
             self.ready_to_jump = False
 
         # Check horizontal collisions
-        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[number_of_level], False)
+        collisions_platform = pygame.sprite.spritecollide(self, list_platform_level[ self.number_of_level], False)
         if not collisions_platform:
             self.on_side = False
         if not self.isJump:

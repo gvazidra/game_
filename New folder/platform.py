@@ -60,7 +60,7 @@ def create_levels():
 
 	strawberry_level[0].append(Item(1500, HEIGHT - 100, strawberry_img))
 
-	list_chicken_level[0].append(Han((1400, HEIGHT - 113), True, 1400, 1500, 0))
+	list_chicken_level[0].append(Han((1400, HEIGHT - 123), True, 1400, 1500, 0))
 
 	# второй уровень
 	distance = 0
@@ -118,12 +118,12 @@ def create_levels():
 	list_back_level[1].append(Platform(1435, HEIGHT - 125, big_cust_img))
 	list_back_level[1].append(Platform(1550, HEIGHT - 105, big_cust_img))
 
-	strawberry_level[1].append(Item(1079, HEIGHT - 73, strawberry_img))
-	list_chicken_level[1].append((Han((664, HEIGHT - 113), True, 664, 830, 1)))
-	list_chicken_level[1].append((Han((830, HEIGHT - 100), True, 664, 830, 1)))
-	list_chicken_level[1].append((Han((1162, HEIGHT - 113), True, 996, 1162,1)))
-	list_chicken_level[1].append((Han((996, HEIGHT - 93), True, 996, 1162,1)))
-	list_chicken_level[1].append((Han((1056, HEIGHT - 93), True, 996, 1100, 1)))
+	strawberry_level[1].append(Item(1079, HEIGHT - 86, strawberry_img))
+	list_chicken_level[1].append((Han((660, HEIGHT - 123), True, 664, 830, 1)))
+	list_chicken_level[1].append((Han((825, HEIGHT - 117), True, 664, 830, 1)))
+	list_chicken_level[1].append((Han((1152, HEIGHT - 123), True, 996, 1162,1)))
+	list_chicken_level[1].append((Han((986, HEIGHT - 113), True, 996, 1162,1)))
+	list_chicken_level[1].append((Han((1056, HEIGHT - 113), True, 996, 1100, 1)))
 	simple_carrot_level[1].append(Item(1411, HEIGHT - 83, simple_carrot_img))
 
 
@@ -164,7 +164,7 @@ def create_levels():
 	list_back_level[2].append(Platform(1040, HEIGHT - 235, palma_img))
 	list_back_level[2].append(Platform(1400, HEIGHT - 135, palma_img))
 	blue_carrot_level[2].append(Item(80, HEIGHT - 355, blue_carrot_img))
-	strawberry_level[2].append(Item(1400, HEIGHT - 73, strawberry_img))
+	strawberry_level[2].append(Item(1400, HEIGHT - 83, strawberry_img))
 
 	#заглушка
 	distance = 80

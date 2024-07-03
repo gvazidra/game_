@@ -66,7 +66,7 @@ strawberry_img = pygame.image.load(os.path.join(img_folder, 'strawberry.png')).c
 simple_carrot_img = pygame.image.load(os.path.join(img_folder, 'simple_carrot.png')).convert()
 water_img  = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
 forest_platform_img  = pygame.image.load(os.path.join(img_folder, 'forest_platform.png')).convert()
-invisible_platform_img  = pygame.image.load(os.path.join(img_folder, '1.png')).convert()
+invisible_platform_img  = pygame.image.load(os.path.join(img_folder, 'invisible_platform.png')).convert()
 cust_img  = pygame.image.load(os.path.join(img_folder, 'cust.png')).convert()
 big_tree1_img  = pygame.image.load(os.path.join(img_folder, 'big_tree1.png')).convert()
 big_tree2_img  = pygame.image.load(os.path.join(img_folder, 'big_tree2.png')).convert()
@@ -131,7 +131,7 @@ heart_image = pygame.image.load(os.path.join(img_folder, 'heart.png')).convert()
 heart_image.set_colorkey(BLACK)
 
 def draw_hearts(life_amount):
-    x = screen.get_width()/2 - life_amount * (10 + heart_image.get_width()) / 2
+    x = width_surface/2 - life_amount * (10 + heart_image.get_width()) / 2
     y = 40
     for _ in range(life_amount):
         virtual_surface.blit(heart_image, (x, y))

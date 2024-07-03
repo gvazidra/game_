@@ -47,21 +47,18 @@ def create_levels():
 	list_ships_level[0].append(Platform(90 + distance, height_surface - 43, ships_img))
 	distance += 165
 	distance += 8
-
-	list_platform_level[0].append(Platform(90 + distance, height_surface - 43, platform_img))
-	distance += 180
-
-	list_platform_level[0].append(Platform(90 + distance, height_surface - 43, platform_img))
-	distance += 180
+	for i in range(5):
+		list_platform_level[0].append(Platform(90 + distance, height_surface - 43, platform_img))
+		distance += 180
 
 	blue_carrot_level[0].append(Item(90, height_surface - 73, blue_carrot_img))
 
 	simple_carrot_level[0].append(Item(90, height_surface - 413, simple_carrot_img))
 
-	strawberry_level[0].append(Item(1500, height_surface - 100, strawberry_img))
+	strawberry_level[0].append(Item(1700, height_surface - 100, strawberry_img))
 
-	list_chicken_level[0].append(Han((1400, height_surface - 123), True, 1400, 1500, 0))
-
+	list_chicken_level[0].append(Han((1405, height_surface - 123), True, 1400, 1500, 0))
+	list_chicken_level[0].append(Han((1505, height_surface - 123), True, 1500, 1700, 0))
 	# второй уровень
 	distance = 0
 	list_platform_level.append([])
@@ -91,20 +88,20 @@ def create_levels():
 		list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
 		distance += 166
 	distance += 166
-
 	list_water_level[1].append(Platform(581,height_surface - 45, water_img))
 	list_water_level[1].append(Platform(913,height_surface - 45, water_img))
 	list_water_level[1].append(Platform(1245,height_surface - 45, water_img))
+	list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
+	distance += 332
+	list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
+	distance += 332
 
-	list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
-	distance += 166
-	distance += 166
-	list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
-	distance += 166
-	distance += 166
-	list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
-	distance += 166
-	list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
+	for i in range(2):
+		list_platform_level[1].append(Platform(249 + distance, height_surface - 50, forest_platform_img))
+		distance += 166
+	for i in range(4):
+		list_water_level[1].append(Platform(distance, height_surface - 45, water_img))
+		distance += 166
 
 	list_back_level[1].append(Platform(747, height_surface - 245, big_tree3_img))
 	list_back_level[1].append(Platform(1079, height_surface - 245, big_tree3_img))
@@ -145,24 +142,29 @@ def create_levels():
 		list_water_level[2].append(Platform(distance, height_surface - 45, water_img))
 		distance += 166
 	distance -= 6
-	for i in range(4):
+	for i in range(5):
 		list_platform_level[2].append(Platform(distance, height_surface - 50, dessert_platform_img))
 		distance += 160
+	for i in range(3):
+		list_water_level[2].append(Platform(distance, height_surface - 45, water_img))
+		distance += 166
 	list_ships_level[2].append(Platform(60, height_surface - 85, cactus_img))
 	list_ships_level[2].append(Platform(160, height_surface - 60, cactus_img))
 	list_ships_level[2].append(Platform(240, height_surface - 95, cactus_img))
 	list_ships_level[2].append(Platform(1040, height_surface - 95, cactus_img))
 	list_ships_level[2].append(Platform(1300, height_surface - 65, cactus_img))
+	list_ships_level[2].append(Platform(1650, height_surface - 65, cactus_img))
 
 
 	list_back_level[2].append(Platform(80, height_surface - 235, palma_img))
 	list_back_level[2].append(Platform(320, height_surface - 135, palma_img))
 	list_platform_level[2].append(Platform(80, height_surface - 335, invisible_platform_img))
 	list_platform_level[2].append(Platform(310, height_surface - 245, invisible_platform_img))
-	list_platform_level[2].append(Platform(1040, height_surface - 335, invisible_platform_img))
+	list_platform_level[2].append(Platform(1040, height_surface - 315, invisible_platform_img))
 	list_platform_level[2].append(Platform(1400, height_surface - 235, invisible_platform_img))
 	list_back_level[2].append(Platform(1040, height_surface - 235, palma_img))
 	list_back_level[2].append(Platform(1400, height_surface - 135, palma_img))
+	list_back_level[2].append(Platform(1710, height_surface - 235, palma_img))
 	blue_carrot_level[2].append(Item(80, height_surface - 355, blue_carrot_img))
 	strawberry_level[2].append(Item(1400, height_surface - 83, strawberry_img))
 

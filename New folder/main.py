@@ -176,51 +176,59 @@ def main():
         pygame.display.flip()
         if is_menu == 'Game':
             game()
+            CURRENT_SIZE = screen.get_size()
+            scaled_surface = transform.scale(virtual_surface, CURRENT_SIZE)
+            screen.blit(scaled_surface, (0, 0))
+            pygame.display.flip()
         if is_menu == 'Pause':
             is_menu = 'Main_menu'
-            global scaled_surface
             darkness_surface = pygame.Surface((width_surface, height_surface), pygame.SRCALPHA)
             darkness_surface.fill((0, 0, 0, 128))
             virtual_surface.blit(darkness_surface, (0, 0))
         if is_menu == 'Main_menu':
-             for button in main_menu_buttons:
+            CURRENT_SIZE = screen.get_size()
+            scaled_surface = transform.scale(virtual_surface, CURRENT_SIZE)
+            screen.blit(scaled_surface, (0, 0))
+            for button in main_menu_buttons:
                 button.handle_hover(mouse_pos)
-                button.draw(virtual_surface)
+                button.draw(screen)
+            pygame.display.flip()
         if is_menu == 'Option_menu':
+            screen.fill((40, 40, 150))
             for button in options_menu_buttons:
                 button.handle_hover(mouse_pos)
-                button.draw(virtual_surface)
+                button.draw(screen)
         if is_menu == 'Pause_2':
             quit_pause_button.handle_hover(mouse_pos)
-            quit_pause_button.draw(virtual_surface)
+            quit_pause_button.draw(screen)
         if is_menu == 'Difficulty_menu':
             for button in difficulty_menu_buttons:
                 button.handle_hover(mouse_pos)
-                button.draw(virtual_surface)
+                button.draw(screen)
         if is_menu == 'Volume_setting':
-            virtual_surface.fill((40, 40, 150))
-            mixer_button_1.draw(virtual_surface)
-            mixer_button_2.draw(virtual_surface)
+            screen.fill((40, 40, 150))
+            mixer_button_1.draw(screen)
+            mixer_button_2.draw(screen)
             quit_button.handle_hover(mouse_pos)
-            quit_button.draw(virtual_surface)
+            quit_button.draw(screen)
             for button in click_1:
                 button.handle_hover(mouse_pos)
-                button.draw(virtual_surface)
+                button.draw(screen)
             for button in click_2:
                 button.handle_hover(mouse_pos)
-                button.draw(virtual_surface)
+                button.draw(screen)
         if is_menu == 'Graph_menu':
-            virtual_surface.fill((40, 40, 150))
+            screen.fill((40, 40, 150))
             for button in click_1:
                 button.handle_hover(mouse_pos)
-                button.draw(virtual_surface)
+                button.draw(screen)
             quit_button.handle_hover(mouse_pos)
-            quit_button.draw(virtual_surface)
+            quit_button.draw(screen)
             if player.images == player_img_set_1:
-                virtual_surface.blit(player_img_set_1[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
+                screen.blit(player_img_set_1[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
                                                            (player_img_set_1[0].get_height() // 2)))
             else:
-                virtual_surface.blit(player_img_set_2[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
+                screen.blit(player_img_set_2[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
                                                            (player_img_set_1[0].get_height() // 2)))
 
             
@@ -238,6 +246,10 @@ def main():
             continue_text = small_font.render("Нажмите Escape, чтобы выйти", True, WHITE)
             continue_rect = continue_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2 + 100))
             virtual_surface.blit(continue_text, continue_rect)
+            CURRENT_SIZE = screen.get_size()
+            scaled_surface = transform.scale(virtual_surface, CURRENT_SIZE)
+            screen.blit(scaled_surface, (0, 0))
+            pygame.display.flip()
 
         if player.number_of_level == 3:
             channel.stop()
@@ -252,11 +264,12 @@ def main():
             continue_rect = continue_text.get_rect(center=(virtual_surface.get_width() // 2, virtual_surface.get_height() // 2 + 100))
             virtual_surface.blit(continue_text, continue_rect)
             channel.play(sound_victory)
-
-        CURRENT_SIZE = screen.get_size()
-        scaled_surface = transform.scale(virtual_surface,CURRENT_SIZE)
-        screen.blit(scaled_surface, (0,0))
+            CURRENT_SIZE = screen.get_size()
+            scaled_surface = transform.scale(virtual_surface, CURRENT_SIZE)
+            screen.blit(scaled_surface, (0, 0))
+            pygame.display.flip()
         pygame.display.flip()
+
     pygame.quit()
     
     

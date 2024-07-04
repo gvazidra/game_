@@ -19,7 +19,8 @@ FPS = 25
 start_x = 430
 start_y = height_surface - 145
 number_of_level = 0
-#построение уровня
+
+#creating a level
 all_sprites = pygame.sprite.Group()
 bad_for_chicken = pygame.sprite.Group()
 list_platform_level = [[]]
@@ -41,11 +42,10 @@ pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
 
-#прорисовка окна
+#drawing the window
 virtual_surface = Surface((width_surface, height_surface))
-
-
 virtual_surface.fill((40, 40, 150))
+
 #file upload
 game_folder = os.path.dirname(__file__)
 img_folder = os.path.join(game_folder, 'img')
@@ -64,24 +64,18 @@ ships_img = pygame.image.load(os.path.join(img_folder, 'ships.png')).convert()
 blue_carrot_img = pygame.image.load(os.path.join(img_folder, 'blue_carrot.png')).convert()
 strawberry_img = pygame.image.load(os.path.join(img_folder, 'strawberry.png')).convert()
 simple_carrot_img = pygame.image.load(os.path.join(img_folder, 'simple_carrot.png')).convert()
-water_img  = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
-forest_platform_img  = pygame.image.load(os.path.join(img_folder, 'forest_platform.png')).convert()
-invisible_platform_img  = pygame.image.load(os.path.join(img_folder, 'invisible_platform.png')).convert()
-cust_img  = pygame.image.load(os.path.join(img_folder, 'cust.png')).convert()
-big_tree1_img  = pygame.image.load(os.path.join(img_folder, 'big_tree1.png')).convert()
-big_tree2_img  = pygame.image.load(os.path.join(img_folder, 'big_tree2.png')).convert()
-big_tree3_img  = pygame.image.load(os.path.join(img_folder, 'big_tree3.png')).convert()
-little_tree_img  = pygame.image.load(os.path.join(img_folder, 'little_tree.png')).convert()
-big_cust_img  = pygame.image.load(os.path.join(img_folder, 'big_cust.png')).convert()
-dessert_platform_img  = pygame.image.load(os.path.join(img_folder, 'dessert_platform.png')).convert()
-palma_img  = pygame.image.load(os.path.join(img_folder, 'palma.png')).convert()
-cactus_img  = pygame.image.load(os.path.join(img_folder, 'cactus.png')).convert()
-
-
-
-
-
-
+water_img = pygame.image.load(os.path.join(img_folder, 'water.png')).convert()
+forest_platform_img = pygame.image.load(os.path.join(img_folder, 'forest_platform.png')).convert()
+invisible_platform_img = pygame.image.load(os.path.join(img_folder, 'invisible_platform.png')).convert()
+cust_img = pygame.image.load(os.path.join(img_folder, 'cust.png')).convert()
+big_tree1_img = pygame.image.load(os.path.join(img_folder, 'big_tree1.png')).convert()
+big_tree2_img = pygame.image.load(os.path.join(img_folder, 'big_tree2.png')).convert()
+big_tree3_img = pygame.image.load(os.path.join(img_folder, 'big_tree3.png')).convert()
+little_tree_img = pygame.image.load(os.path.join(img_folder, 'little_tree.png')).convert()
+big_cust_img = pygame.image.load(os.path.join(img_folder, 'big_cust.png')).convert()
+dessert_platform_img = pygame.image.load(os.path.join(img_folder, 'dessert_platform.png')).convert()
+palma_img = pygame.image.load(os.path.join(img_folder, 'palma.png')).convert()
+cactus_img = pygame.image.load(os.path.join(img_folder, 'cactus.png')).convert()
 
 sound_floders = os.path.join(game_folder, 'sounds')
 sound_walk_pig = pygame.mixer.Sound(sound_floders + '\\pig_walk_sound.ogg')
@@ -99,8 +93,6 @@ sound_eat = pygame.mixer.Sound(sound_floders + '\\eat_sound.ogg')
 sound_hurt = pygame.mixer.Sound(sound_floders + '\\hurt_sound.ogg')
 sound_han = pygame.mixer.Sound(sound_floders + '\\han_sound.ogg')
 sound_water = pygame.mixer.Sound(sound_floders + '\\water_sound.ogg')
-
-#pygame.mixer.init()
 
 #image of button
 button_image = pygame.image.load(os.path.join(img_folder, 'play_button.png')).convert()
@@ -130,18 +122,19 @@ hard_hover_image = pygame.image.load(os.path.join(img_folder, 'hard_triggered.pn
 heart_image = pygame.image.load(os.path.join(img_folder, 'heart.png')).convert()
 heart_image.set_colorkey(BLACK)
 
+
 def draw_hearts(life_amount):
     x = width_surface/2 - life_amount * (10 + heart_image.get_width()) / 2
     y = 40
     for _ in range(life_amount):
         virtual_surface.blit(heart_image, (x, y))
-        x +=  heart_image.get_width() + 10
-        
-        
+        x += heart_image.get_width() + 10
+
+
 volume_mixer = [pygame.image.load(os.path.join(img_folder + '\\volume_bar', f"volume_{i}.png")).convert() for i in range(0, 10)]
 
 click_image = pygame.image.load(os.path.join(img_folder, 'click.png')).convert()
 
 pygame.mixer.music.load(sound_floders + '\\game_music.ogg')
 pygame.mixer.music.set_volume(4 / 9)
-pygame.mixer.music.play(-1)     
+pygame.mixer.music.play(-1)

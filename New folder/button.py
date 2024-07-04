@@ -2,6 +2,7 @@
 
 from connectionAssets import *
 
+
 class Button:
     def __init__(self, center_x, center_y, image, hover_image):
         self.center_x = center_x
@@ -19,8 +20,6 @@ class Button:
         current_image = self.hover_image if self.is_hovered else self.image
         virtual_surface.blit(current_image, (self.x, self.y))
 
-
-
     def is_clicked(self, mouse_pos):
         button_rect = self.image.get_rect(center=(self.center_x, self.center_y))
         return button_rect.collidepoint(mouse_pos)
@@ -28,13 +27,14 @@ class Button:
     def handle_hover(self, mouse_pos):
         self.is_hovered = self.is_clicked(mouse_pos)
 
+
 class MixerButton():
     def __init__(self, center_x, center_y, image):
         self.center_x = center_x
         self.center_y = center_y
         self.k = 4
-        self.images = image  # предполагается, что image - список из 4 изображений
-        self.image = self.images[self.k]  # изображение по умолчанию
+        self.images = image
+        self.image = self.images[self.k]
         self.image.set_colorkey(BLACK)
         self.width, self.height = self.image.get_size()
         self.x = center_x - self.width // 2
@@ -72,7 +72,7 @@ class MixerButton():
 
 
 quit_button = Button(WIDTH // 2, HEIGHT // 2 + 100, quit_button_img, quit_hover_button_img)
-quit_pause_button = Button(WIDTH // 2,  HEIGHT// 2, quit_button_img, quit_hover_button_img)
+quit_pause_button = Button(WIDTH // 2,  HEIGHT // 2, quit_button_img, quit_hover_button_img)
 play_button = Button(WIDTH // 2, HEIGHT // 2 - 100, button_image, button_hover_image)
 option_button = Button(WIDTH // 2, HEIGHT // 2, op_button_img, op_hover_button_img)
 volume_button = Button(WIDTH // 2, HEIGHT // 2 - 100, volume_button_img, volume_hover_button_img)
@@ -86,7 +86,7 @@ difficulty_menu_buttons = [hard_button, normal_button, easy_button]
 
 main_menu_buttons = [quit_button, play_button, option_button]
 
-options_menu_buttons = [volume_button, graph_button , quit_button]
+options_menu_buttons = [volume_button, graph_button, quit_button]
 
 mixer_button_1 = MixerButton(WIDTH // 2, HEIGHT // 2, volume_mixer)
 

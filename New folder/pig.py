@@ -7,10 +7,11 @@ from connectionAssets import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
+        self.keyboards = keyboards
         self.life_amount = 3
         self.number_of_level = 0
         self.water_ability = 1
-        self.shoot_ability = 0
+        self.shoot_ability = 1
         pygame.sprite.Sprite.__init__(self)
         self.key_pressed = False
         self.images = player_img_set_1
@@ -55,13 +56,13 @@ class Player(pygame.sprite.Sprite):
         self.isJump = True
 
     def update(self):
-        keys = pygame.key.get_pressed()
+        keys = key.get_pressed()
         
-        if keys[pygame.K_LEFT]:
+        if keys[self.keyboards[0]]:
             self.move(-1)
             self.dir = -1
             self.speed_x = -PLAYER_SPEED
-        elif keys[pygame.K_RIGHT]:
+        elif keys[self.keyboards[1]]:
             self.move(1)
             self.dir = 1
             self.speed_x = PLAYER_SPEED
@@ -70,7 +71,7 @@ class Player(pygame.sprite.Sprite):
             if not self.isJump is True and channel.get_sound() != sound_button:
                 channel.stop()
 
-        if keys[pygame.K_SPACE] and self.ready_to_jump:
+        if keys[self.keyboards[2]] and self.ready_to_jump:
             self.speed_y = -33
             if self.jumpSound == 0 and channel.get_sound() != sound_button:
                 channel.play(sound_pig[random.randint(0, 2)])
@@ -177,5 +178,11 @@ class Player(pygame.sprite.Sprite):
 
     def shoot_carrot(self):
         if self.shoot_ability:
-         carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
-         return carrot
+            carrot = Carrot(self.rect.centerx, self.rect.top + 50, self.dir)
+            return carrot
+        
+    def set_keyboards(self, keyboards_temp):
+        self.keyboards = keyboards_temp
+    
+    def get_keyboards(self):
+        return self.keyboards

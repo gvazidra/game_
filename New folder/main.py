@@ -30,7 +30,8 @@ def main():
     water_used = False
     Game_active = True
     Is_choose = False
-
+    keyboards_img = keyboards_images[0]
+    keyboards_setting_img = keyboards_menu_images[0]
     while running: 
         if not player.water_ability and not water_used:
             for j in range (list_water_level[number_of_level].__len__()):
@@ -44,10 +45,12 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 current_time = pygame.time.get_ticks()
                 if current_time - last_shot_time > 500:
-                    if event.key == pygame.K_r:
+                    k = player.get_keyboards()
+                    if event.key == k[3]:
                         carrot = player.shoot_carrot()
                         if carrot:
                             carrots.add(carrot)
+                            print("b")
                             bad_for_chicken.add(carrot)
                             all_sprites.add(carrot)
                             last_shot_time = current_time
@@ -62,6 +65,8 @@ def main():
                         is_menu = 'Game'
                     if is_menu == 'Difficulty_menu':
                         is_menu = 'Main_menu'
+                    if is_menu == 'Cntrl':
+                        is_menu = 'Game'
                     if is_menu == 'Loss' or is_menu == 'Win':
                         player.water_ability = 1
                         player.shoot_ability = 0
@@ -76,6 +81,9 @@ def main():
                         virtual_surface.fill((40, 40, 150))
                         is_menu = 'Option_menu'
                     if is_menu == 'Graph_menu':
+                        virtual_surface.fill((40, 40, 150))
+                        is_menu = 'Option_menu'
+                    if is_menu == 'Control_menu':
                         virtual_surface.fill((40, 40, 150))
                         is_menu = 'Option_menu'
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -101,13 +109,15 @@ def main():
                         channel.play(sound_button)
                     if graph_button.is_clicked(mouse_pos):
                         is_menu = 'Graph_menu'
+                    if control_button.is_clicked(mouse_pos):
+                        is_menu = 'Control_menu'
                 elif is_menu == 'Pause_2':
                     if quit_pause_button.is_clicked(mouse_pos):
                         is_menu = 'Main_menu'
                         channel.play(sound_button)
                 elif is_menu == 'Difficulty_menu':
                     if easy_button.is_clicked(mouse_pos):
-                        is_menu = 'Game'
+                        is_menu = 'Cntrl'
                         player.life_amount = 5
                         number_of_level = 0
                         create_levels()
@@ -115,7 +125,7 @@ def main():
                         Is_choose = True
                         channel.play(sound_button)
                     if normal_button.is_clicked(mouse_pos):
-                            is_menu = 'Game'
+                            is_menu = 'Cntrl'
                             player.life_amount = 3
                             number_of_level = 0
                             create_levels()
@@ -123,7 +133,7 @@ def main():
                             Is_choose = True
                             channel.play(sound_button)
                     if hard_button.is_clicked(mouse_pos):
-                            is_menu = 'Game'
+                            is_menu = 'Cntrl'
                             player.life_amount = 1
                             number_of_level = 0
                             create_levels()
@@ -155,6 +165,21 @@ def main():
                             player.skins_update(player_img_set_2)
                         else:
                             player.skins_update(player_img_set_1)
+                elif is_menu == 'Control_menu':
+                    if quit_button_cntrl.is_clicked(mouse_pos):
+                        is_menu = 'Option_menu'
+                        virtual_surface.fill((40, 40, 150))
+                        channel.play(sound_button)
+                    if click_1[0].is_clicked(mouse_pos) or click_1[1].is_clicked(mouse_pos):
+                        if player.get_keyboards()[0] == pygame.K_LEFT:
+                            player.set_keyboards([pygame.K_a, pygame.K_d, pygame.K_w, pygame.K_SPACE])
+                            keyboards_img = keyboards_images[1]
+                            keyboards_setting_img = keyboards_menu_images[1]
+                            
+                        else:
+                            player.set_keyboards(keyboards)
+                            keyboards_img = keyboards_images[0]
+                            keyboards_setting_img = keyboards_menu_images[0]
             elif event.type == pygame.VIDEORESIZE:
                 global CURRENT_SIZE
                 CURRENT_SIZE = event.size
@@ -218,7 +243,24 @@ def main():
             else:
                 screen.blit(player_img_set_2[0], (screen.get_width() / 2 - (player_img_set_1[0].get_width() / 2), screen.get_height() / 2 -
                                                            (player_img_set_1[0].get_height() // 2)))
-
+        if is_menu == 'Control_menu':
+            screen.fill((40, 40, 150))
+            controls_rect = controls.get_rect(center=(screen.get_width() // 2 - 80, screen.get_height() // 2))
+            controls2_rect = keyboards_setting_img.get_rect(center=(screen.get_width() // 2 + 80, screen.get_height() // 2))
+            screen.blit(keyboards_setting_img, controls2_rect)
+            screen.blit(controls, controls_rect)
+            for button in click_1:
+                button.handle_hover(mouse_pos)
+                button.draw(screen)
+            quit_button_cntrl.handle_hover(mouse_pos)
+            quit_button_cntrl.draw(screen)
+            
+        if is_menu == 'Cntrl':
+            screen.fill((40, 40, 150))
+            keyboards_img.set_colorkey(BLACK)
+            keyboards_img_rect = keyboards_img.get_rect(center=(screen.get_width() // 2, screen.get_height() // 2))
+            screen.blit(keyboards_img, keyboards_img_rect)
+            
         if player.life_amount <= 0:
             channel.stop()
             virtual_surface.fill((12, 12, 12))

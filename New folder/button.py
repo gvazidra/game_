@@ -73,12 +73,15 @@ class MixerButton():
 
 quit_button = Button(WIDTH // 2, HEIGHT // 2 + 100, quit_button_img, quit_hover_button_img)
 quit_pause_button = Button(WIDTH // 2,  HEIGHT // 2, quit_button_img, quit_hover_button_img)
+quit_button_cntrl = Button(WIDTH // 2, HEIGHT // 2 + 200, quit_button_img, quit_hover_button_img)
 play_button = Button(WIDTH // 2, HEIGHT // 2 - 100, button_image, button_hover_image)
+
 option_button = Button(WIDTH // 2, HEIGHT // 2, op_button_img, op_hover_button_img)
 volume_button = Button(WIDTH // 2, HEIGHT // 2 - 100, volume_button_img, volume_hover_button_img)
-graph_button = Button(WIDTH // 2, HEIGHT // 2, graph_button_img, graph_hover_button_img)
-
+graph_button = Button(WIDTH // 2 - 100, HEIGHT // 2, graph_button_img, graph_hover_button_img)
+control_button = Button(WIDTH // 2 + 100, HEIGHT // 2, control_button_img, control_hover_button_img)
 easy_button = Button(WIDTH // 2, HEIGHT // 2 + 100, easy_image, easy_hover_image)
+
 normal_button = Button(WIDTH // 2, HEIGHT // 2, normal_image, normal_hover_image)
 hard_button = Button(WIDTH // 2, HEIGHT // 2 - 100, hard_image, hard_hover_image)
 
@@ -86,7 +89,7 @@ difficulty_menu_buttons = [hard_button, normal_button, easy_button]
 
 main_menu_buttons = [quit_button, play_button, option_button]
 
-options_menu_buttons = [volume_button, graph_button, quit_button]
+options_menu_buttons = [volume_button, graph_button, quit_button, control_button]
 
 mixer_button_1 = MixerButton(WIDTH // 2, HEIGHT // 2, volume_mixer)
 

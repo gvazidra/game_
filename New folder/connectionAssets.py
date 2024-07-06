@@ -6,6 +6,7 @@ import pygame
 pygame.init()
 import random
 
+keyboards = [pygame.K_LEFT, pygame.K_RIGHT, K_SPACE, K_r]
 info = display.Info()
 WIDTH = info.current_w
 HEIGHT = info.current_h
@@ -110,6 +111,9 @@ volume_hover_button_img = pygame.image.load(os.path.join(img_folder, 'volume_but
 graph_button_img = pygame.image.load(os.path.join(img_folder, 'graph_button.png')).convert()
 graph_hover_button_img = pygame.image.load(os.path.join(img_folder, 'graph_button_triggered.png')).convert()
 
+control_button_img = pygame.image.load(os.path.join(img_folder, 'control_button.png')).convert()
+control_hover_button_img = pygame.image.load(os.path.join(img_folder, 'control_button_triggered.png')).convert()
+
 easy_image = pygame.image.load(os.path.join(img_folder, 'easy.png')).convert()
 easy_hover_image = pygame.image.load(os.path.join(img_folder, 'easy_triggered.png')).convert()
 
@@ -121,6 +125,8 @@ hard_hover_image = pygame.image.load(os.path.join(img_folder, 'hard_triggered.pn
 
 heart_image = pygame.image.load(os.path.join(img_folder, 'heart.png')).convert()
 heart_image.set_colorkey(BLACK)
+
+control_font = pygame.font.Font(os.path.join(img_folder, 'FFFFORWA.TTF'), 36)
 
 
 def draw_hearts(life_amount):
@@ -138,3 +144,10 @@ click_image = pygame.image.load(os.path.join(img_folder, 'click.png')).convert()
 pygame.mixer.music.load(sound_floders + '\\game_music.ogg')
 pygame.mixer.music.set_volume(4 / 9)
 pygame.mixer.music.play(-1)
+
+keyboards_images = [pygame.image.load(os.path.join(img_folder, f"background_{i}.png")).convert() for i in range(1, 3)]
+keyboards_menu_images = [pygame.image.load(os.path.join(img_folder, f"controls_{i}.png")).convert() for i in range(1, 3)]
+controls = pygame.image.load(os.path.   join(img_folder, "controls.png")).convert()
+controls.set_colorkey(BLACK)
+for image in keyboards_menu_images:
+    image.set_colorkey(BLACK)
